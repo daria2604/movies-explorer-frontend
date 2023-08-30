@@ -1,0 +1,45 @@
+.footer {
+  font-size: 13px;
+  font-weight: 400;
+  padding: 79px 70px 20px 70px;
+}
+
+.footer__title {
+  color: #A0A0A0;
+  text-align: center;
+  margin: 0;
+}
+
+.footer__container {
+  border-top: 1px solid #E8E8E8;
+  padding-top: 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__yandex {
+  display: flex;
+  column-gap: 20px;
+}
+
+.footer__yandex-title {
+  margin: 0;
+}
+
+.footer__yandex-link {
+  text-decoration: none;
+
+  &:visited {
+    color: #000;
+  }
+
+  &:link {
+    color: #000;
+  }
+
+  &:hover {
+    opacity: .7;
+  }
+}
