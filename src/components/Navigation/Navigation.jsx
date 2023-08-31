@@ -54,7 +54,8 @@ const Navigation = ({ isLoggedIn }) => {
           >
             Аккаунт
             {location.pathname === "/movies" ||
-            location.pathname === "/profile" ? (
+            location.pathname === "/profile" ||
+            location.pathname === "/saved-movies" ? (
               <NavigationButton>
                 <span className="navigation__button-icon"></span>
               </NavigationButton>
