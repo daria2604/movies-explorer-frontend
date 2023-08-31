@@ -1,18 +1,15 @@
 import React from "react";
 import "./Movies.css";
-import Header from "../Header/Header";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
+import Page from "../Page/Page";
 
 const Movies = ({ isLoggedIn }) => {
   return (
-    <>
-      <Header isLoggedIn={isLoggedIn} pathName={'movies'}/>
-      <main className="movies">
+    <Page isLoggedIn={isLoggedIn} pathName={'movies'} className={'movies'}>
         <SearchForm />
         <MoviesCardList />
-      </main>
-    </>
+    </Page>
   );
 };
 
