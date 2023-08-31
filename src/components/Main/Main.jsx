@@ -1,5 +1,4 @@
 import React from "react";
-import "./Main.css";
 import Header from "../Header/Header";
 import Promo from "../Promo/Promo";
 import NavTab from "../NavTab/NavTab";
@@ -12,6 +11,7 @@ const Main = ({ loggedIn }) => {
     <>
       <Header 
         loggedIn={ loggedIn }
+        pathName={'main'}
       />
       <main className="main">
         <Promo />

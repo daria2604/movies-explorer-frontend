@@ -1,8 +1,12 @@
 .header {
-  background-color: #F3C1F8;
+  background-color: #fff;
   color: #000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 18px 70px;
+}
+
+.header_path_main {
+  background-color: #F3C1F8;
 }

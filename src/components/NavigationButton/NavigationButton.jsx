@@ -3,7 +3,7 @@ import './NavigationButton.css';
 
 const NavigationButton = ({ className, children }) => {
   return (
-    <button type="button" className={`navigation__button ${ className }`}>
+    <button type="button" className={`navigation__button navigation__button_type_icon ${ className }`}>
       { children }
     </button>
   )

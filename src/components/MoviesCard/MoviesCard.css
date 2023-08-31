@@ -1,0 +1,80 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 14px;
+}
+
+.card__image-container {
+  width: 360px;
+  height: 201px;
+  position: relative;
+}
+
+.card__image {
+  width: inherit;
+  height: inherit;
+  background-color: salmon;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.card__button {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 1;
+}
+
+.card__button_hide {
+  display: none;
+}
+
+.card__save-button {
+  width: 72px;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: .9;
+  border-radius: 30px;
+  background-color: #F9F9F9;
+  padding: 6px 7px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .8;
+    transition: all .2s linear;
+  }
+}
+
+.card__save-icon {
+  display: block;
+  background: url(../../images/save_small.svg) no-repeat center;
+  width: 21px;
+  height: 21px;
+}
+
+.card__info {
+  display: flex;
+  padding: 0 14px;
+  column-gap: 30px;
+}
+
+.card__title {
+  margin: 0;
+  width: 250px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.card__duration {
+  margin: 0;
+  color: #A0A0A0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: .9;
+  padding: 3px 4px;
+  border-radius: 3px;
+  background-color: #F9F9F9;
+  width: 44px;
+}

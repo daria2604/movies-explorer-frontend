@@ -3,9 +3,9 @@ import './Header.css';
 import Navigation from "../Navigation/Navigation";
 import logo from "../../images/logo.svg";
 
-const Header = ({ isLoggedIn }) => {
+const Header = ({ isLoggedIn, pathName }) => {
   return (
-    <header className="header">
+    <header className={`header header_path_${pathName}`}>
       <img src={ logo } alt="Логотип" className="header__logo" />
         <Navigation isLoggedIn={ isLoggedIn }/>
     </header>

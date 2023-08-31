@@ -1,0 +1,37 @@
+.search__checkbox {
+  padding: 11px 30px;
+  border-left: 1px solid #CBCBCB;
+}
+
+.search__label {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  display: flex;
+  column-gap: 14px;
+  align-items: center;
+}
+
+.search__input_visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+input[type="checkbox"] + .search__switcher {
+  border: none;
+  display: block;
+  background: url(../../images/switcher_inactive.svg) no-repeat center;
+  width: 36px;
+  height: 20px;
+  cursor: pointer;
+  transition: all .15s ease-in;
+}
+
+input[type="checkbox"] + .search__switcher_active {
+  background: url(../../images/switcher-active.svg) no-repeat center;
+}
