@@ -13,20 +13,32 @@
   padding: 70px 0 28px 0;
 }
 
+.cards__container_path_saved {
+  padding-bottom: 102px;
+}
+
+.cards__button-container {
+  margin: 50px 0 80px;
+}
+
 .cards__button {
   border: none;
+  width: 320px;
+  padding: 9px 60px;
   border-radius: 6px;
   background-color: #F9F9F9;
   text-align: center;
   font-size: 12px;
   font-weight: 500;
-  padding: 9px 60px;
-  width: 320px;
-  margin: 50px 0 80px;
+  visibility: visible;
   cursor: pointer;
 
   &:hover {
     opacity: .8;
     transition: all .2s linear;
   }
+}
+
+.cards__button_hide {
+  visibility: hidden;
 }
