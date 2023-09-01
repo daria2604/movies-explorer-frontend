@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import "./App.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
-import Footer from "../Footer/Footer";
 import { Route, Routes } from "react-router-dom";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState();
@@ -24,8 +24,9 @@ const App = () => {
             </Route>
             <Route path='/saved-movies' element={<SavedMovies isLoggedIn={isLoggedIn}/>}>
             </Route>
+            <Route path='/profile' element={<Profile />}>
+            </Route>
           </Routes>
-          <Footer />
         </CurrentUserContext.Provider>
       </div>
     </div>

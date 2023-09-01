@@ -1,7 +1,12 @@
 .footer {
   font-size: 13px;
   font-weight: 400;
-  padding: 79px 70px 20px 70px;
+  padding: 79px 0 20px 0;
+}
+
+.footer_path_main {
+  padding-left: 70px;
+  padding-right: 70px;
 }
 
 .footer__title {

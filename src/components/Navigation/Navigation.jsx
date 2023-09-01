@@ -49,7 +49,7 @@ const Navigation = ({ isLoggedIn }) => {
           <Link
             to="/profile"
             className={`navigation__link navigation__link_type_logged-in ${
-              location.pathname === "/profile" ? "navigation__link_active" : ""
+              location.pathname === "/profile" ? "navigation__link_active navigation__link_type_profile_active" : ""
             }`}
           >
             Аккаунт

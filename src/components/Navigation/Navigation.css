@@ -32,6 +32,10 @@
   border-bottom: 2px solid #000;
 }
 
+.navigation__link_type_profile_active {
+  border-bottom: none;
+}
+
 .navigation__link_type_logged-in {
   font-size: 14px;
 
