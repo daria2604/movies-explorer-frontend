@@ -1,12 +1,12 @@
 import React from "react";
 import "./Register.css";
-import AuthPage from "../AuthPage/AuthPage";
+import Auth from "../Auth/Auth";
 import FormInput from "../FormInput/FormInput";
 import Form from "../Form/Form";
 
 const Register = () => {
   return (
-    <AuthPage heading={"Добро пожаловать!"}>
+    <Auth heading={"Добро пожаловать!"}>
       <Form
         formType={"register"}
         buttonText={"Зарегистрироваться"}
@@ -32,7 +32,7 @@ const Register = () => {
           label={"Пароль"}
         />
       </Form>
-    </AuthPage>
+    </Auth>
   );
 };
 

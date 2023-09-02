@@ -21,3 +21,13 @@
   margin: 0;
   top: 184px;
 }
+
+@media (max-width: 768px) {
+  .promo__image {
+    padding: 224px 0 240px 0;
+  }
+
+  .promo__heading {
+    top: 326px;
+  }
+}

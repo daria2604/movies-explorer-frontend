@@ -72,3 +72,13 @@
   margin-top: 70px;
   margin-bottom: 10px;
 }
+
+@media (max-width: 768px) {
+  .search {
+    padding-top: 80px;
+  }
+
+  .search__divider {
+    margin-top: 110px;
+  }
+}

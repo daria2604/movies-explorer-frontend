@@ -1,9 +1,9 @@
 import React from "react";
-import "./AuthPage.css";
+import "./Auth.css";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 
-const AuthPage = ({ heading, children }) => {
+const Auth = ({ heading, children }) => {
   return (
     <div className="auth">
       <header className="auth__header">
@@ -17,4 +17,4 @@ const AuthPage = ({ heading, children }) => {
   );
 };
 
-export default AuthPage;
+export default Auth;

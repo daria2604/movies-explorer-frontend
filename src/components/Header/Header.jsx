@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Header.css";
 import Navigation from "../Navigation/Navigation";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 
 const Header = ({ isLoggedIn, pathName }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
   return (
     <header className={`header header_path_${pathName}`}>
       <Link to="/">
         <img src={logo} alt="Логотип" className="header__logo" />
       </Link>
-      <Navigation isLoggedIn={isLoggedIn} />
+      {isLoggedIn ? (
+        <nav className="header__nav">
+          <Link to="/signup" className="header__link link">Регистрация</Link>
+          <Link to="/signin" className="header__link header__button button">Войти</Link>
+        </nav>
+      ) : (
+        <>
+          <button className="header__menu-button" onClick={handleOpen}></button>
+          <Navigation isOpen={isOpen} onClose={handleClose}/>
+        </>
+      )}
+      
     </header>
   );
 };

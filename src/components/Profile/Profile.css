@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 74px 0 70px 0;
+  padding-top: 74px;
 }
 
 .profile__heading {
@@ -124,4 +124,10 @@
 
 .profile__error{
   margin-bottom: 4px;
+}
+
+@media (max-width: 820px) {
+  .profile {
+    padding-top: 236px;
+  }
 }

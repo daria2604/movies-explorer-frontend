@@ -16,3 +16,22 @@
   min-height: 100vh;
   margin: 0 auto;
 }
+
+.button {
+  &:hover {
+    opacity: .8;
+    transition: all .2s linear;
+  }
+}
+
+.link {
+  &:hover {
+    opacity: .7;
+    transition: all .2s linear;
+  }
+
+  &:link,
+  &:visited {
+    color: inherit;
+  }
+}

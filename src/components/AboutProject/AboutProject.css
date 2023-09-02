@@ -9,6 +9,7 @@
   justify-content: space-between;
   column-gap: 40px;
 }
+
 .about-project__column {
   list-style: none;
   display: flex;
@@ -16,20 +17,24 @@
   row-gap: 26px;
   max-width: 550px;
 }
+
 .about-project__heading {
   margin: 0;
   font-size: 20px;
   font-weight: 400;
   letter-spacing: -0.8px;
 }
+
 .about-project__text {
   margin: 0;
   line-height: 1.4;
 }
+
 .about-project__timeline {
   display: grid;
   grid-template-columns: 1fr 6fr;
 }
+
 .about-project__timeline-block {
   text-align: center;
   display: flex;
@@ -40,6 +45,7 @@
 .about-project__timeline-block_size_short {
   width: 228px;
 }
+
 .about-project__timeline-duration {
   padding: 9px 0;
   background-color: #F2F2F2;
@@ -53,4 +59,19 @@
 .about-project__timeline-caption {
   color: #A0A0A0;
   line-height: 1.2;
+}
+
+@media (max-width: 820px) {
+  .about-project__info {
+    column-gap: 30px;
+  }
+
+  .about-project__text {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about-project__timeline-block_size_short {
+    width: 140px;
+  }
 }

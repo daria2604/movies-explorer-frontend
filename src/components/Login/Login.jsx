@@ -1,12 +1,12 @@
 import React from "react";
 import './Login.css';
-import AuthPage from "../AuthPage/AuthPage";
+import Auth from "../Auth/Auth";
 import Form from "../Form/Form";
 import FormInput from "../FormInput/FormInput";
 
 const Login = () => {
   return (
-    <AuthPage heading={'Рады видеть!'}>
+    <Auth heading={'Рады видеть!'}>
       <Form
         formType={"login"}
         buttonText={"Войти"}
@@ -26,7 +26,7 @@ const Login = () => {
           label={"Пароль"}
         />
       </Form>
-    </AuthPage>
+    </Auth>
   )
 };
 

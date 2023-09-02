@@ -66,3 +66,52 @@
   border-radius: 10px;
   background-color: salmon;
 }
+
+@media (max-width: 820px) {
+  .about-me__container {
+    padding-bottom: 90px;
+  }
+
+  .about-me__name {
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -1.6px;
+  }
+
+  .about-me__profession {
+    margin: 16px 0 20px 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about-me__description {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about-me__image {
+    width: 255px;
+    height: 307px;
+  }
+
+  .about-me__info {
+    max-width: 364px;
+    row-gap: 87px;
+  }
+}
+
+@media (max-width: 650px) {
+  .about-me__container {
+    flex-direction: column;
+    row-gap: 40px;
+  }
+
+  .about-me__info {
+    order: 2;
+    row-gap: 40px;
+  }
+
+  .about-me__profession {
+    margin-top: 20px;
+  }
+}
