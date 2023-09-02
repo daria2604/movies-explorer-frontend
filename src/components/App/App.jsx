@@ -9,6 +9,7 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import NotFound from "../NotFound/NotFound";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState();
@@ -31,6 +32,8 @@ const App = () => {
             <Route path='/signup' element={<Register />}>
             </Route>
             <Route path='/signin' element={<Login />}>
+            </Route>
+            <Route path='*' element={<NotFound />}>
             </Route>
           </Routes>
         </CurrentUserContext.Provider>
