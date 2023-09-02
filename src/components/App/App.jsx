@@ -7,6 +7,8 @@ import { Route, Routes } from "react-router-dom";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
+import Register from "../Register/Register";
+import Login from "../Login/Login";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState();
@@ -25,6 +27,10 @@ const App = () => {
             <Route path='/saved-movies' element={<SavedMovies isLoggedIn={isLoggedIn}/>}>
             </Route>
             <Route path='/profile' element={<Profile />}>
+            </Route>
+            <Route path='/signup' element={<Register />}>
+            </Route>
+            <Route path='/signin' element={<Login />}>
             </Route>
           </Routes>
         </CurrentUserContext.Provider>
