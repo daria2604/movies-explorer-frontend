@@ -35,3 +35,13 @@ input[type="checkbox"] + .search__switcher {
 input[type="checkbox"] + .search__switcher_active {
   background: url(../../images/switcher-active.svg) no-repeat center;
 }
+
+@media (max-width: 590px) {
+  .search__checkbox {
+    border-left:  none;
+    padding: 0;
+  }
+  .search__label {
+    font-size: 11px;
+  }
+}

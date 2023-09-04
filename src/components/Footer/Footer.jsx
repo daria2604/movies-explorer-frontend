@@ -12,7 +12,7 @@ const Footer = () => {
         <span className="footer__copyright">&copy; 2023</span>
         <div className="footer__yandex">
           <p className="footer__yandex-title">Яндекс.Практикум</p>
-          <a href="https://github.com/yandex-practicum" target="blank" className="footer__yandex-link">Github</a>
+          <a href="https://github.com/yandex-practicum" target="blank" className="link footer__yandex-link">Github</a>
         </div>
       </div>
     </footer>

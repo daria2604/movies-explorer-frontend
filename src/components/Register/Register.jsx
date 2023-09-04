@@ -18,18 +18,19 @@ const Register = () => {
           inputType={"text"}
           inputName={"name"}
           label={"Имя"}
-          inputValue={"Дарья"}
+          placeholderText={'Введите имя'}
         />
         <FormInput
           inputType={"email"}
           inputName={"email"}
           label={"E-mail"}
-          inputValue={"pochta@yandex.ru"}
+          placeholderText={'Введите e-mail'}
         />
         <FormInput
           inputType={"password"}
           inputName={"password"}
           label={"Пароль"}
+          placeholderText={'Введите пароль'}
         />
       </Form>
     </Auth>

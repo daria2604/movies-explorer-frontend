@@ -2,6 +2,7 @@ import React from "react";
 import './AboutMe.css';
 import Section from "../Section/Section";
 import Portfolio from "../Portfolio/Portfolio";
+import photo from '../../images/photo.jpg';
 
 const AboutMe = () => {
   return (
@@ -20,9 +21,9 @@ const AboutMe = () => {
             nulla pariatur.
             </p>
           </div>
-          <a href="https://github.com/daria2604" target="blank" className="about-me__link">Github</a>
+          <a href="https://github.com/daria2604" target="blank" className="link about-me__link">Github</a>
         </div>
-        <img src="" alt="Моя фотография" className="about-me__image" />
+        <img src={photo} alt="Моя фотография" className="about-me__image" />
       </div>
       <Portfolio />
     </Section>

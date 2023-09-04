@@ -1,16 +1,7 @@
-
 .portfolio__link-content {
   text-decoration: none;
   display: flex;
   justify-content: space-between;
-
-  &:visited {
-    color: #000;
-  }
-
-  &:link {
-    color: #000;
-  }
 }
 
 .portfolio__link {
@@ -24,11 +15,6 @@
 
   &:first-of-type {
     padding-top: 0;
-  }
-
-  &:hover {
-    opacity: .7;
-    transition: all .2s linear;
   }
 }
 
@@ -54,5 +40,23 @@
   .portfolio__link-heading {
     font-size: 28px;
     line-height: 1.8;
+  }
+}
+
+@media (max-width: 540px) {
+  .portfolio__link-heading {
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__link-icon {
+    background: url(../../images/link-arrow-mobile.svg) no-repeat center;
+    width: 18px;
+    height: 28px;
+  }
+
+  .portfolio__link {
+    padding-bottom: 19px;
   }
 }

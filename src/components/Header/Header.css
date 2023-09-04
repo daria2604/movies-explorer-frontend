@@ -51,6 +51,7 @@
     border: none;
     position: relative;
     cursor: pointer;
+    padding: 0;
 
     &::after {
       position: absolute;
@@ -71,5 +72,46 @@
       width: 28px;
       background-color: #000;
     }
+  }
+}
+
+@media (max-width: 540px) {
+  .header {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .header__link {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .header__nav {
+    column-gap: 14px;
+  }
+
+  .header__menu-button {
+    width: 22px;
+    height: 2.5px;
+  }
+
+  .header__menu-button::after {
+    position: absolute;
+    content: "";
+    top: -10px;
+    right: 0;
+    width: 22px;
+    height: 2.5px;
+    background-color: #000;
+  }
+
+  .header__menu-button::before {
+    position: absolute;
+    content: "";
+    top: 10px;
+    right: 0;
+    width: 22px;
+    height: 2.5px;
+    background-color: #000;
   }
 }

@@ -23,7 +23,6 @@ const SearchForm = () => {
           <FilterCheckbox isOn={toggle} handleToggle={handleToggleSwitcher} />
         </div>
         </form>
-        <span className="search__divider"></span>
     </section>
   )
 };

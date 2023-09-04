@@ -18,12 +18,13 @@ const Login = () => {
           inputType={"email"}
           inputName={"email"}
           label={"E-mail"}
-          inputValue={"pochta@yandex.ru"}
+          placeholderText={'Ведите e-mail'}
         />
         <FormInput
           inputType={"password"}
           inputName={"password"}
           label={"Пароль"}
+          placeholderText={'Введите пароль'}
         />
       </Form>
     </Auth>

@@ -64,7 +64,7 @@ const Profile = ({ isLoggedIn }) => {
               <Error type={"profile__error"}></Error>
               <button
                 type="submit"
-                className="profile__button profile__submit-button"
+                className="button profile__button profile__submit-button"
                 onSubmit={handleSubmit}
               >
                 Сохранить

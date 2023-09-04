@@ -17,3 +17,13 @@
     padding: 90px 50px;
   }
 }
+
+@media (max-width: 540px) {
+  .section {
+    padding: 70px 18px;
+  }
+
+  .section__heading {
+    padding-bottom: 28px;
+  }
+}

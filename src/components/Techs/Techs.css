@@ -57,7 +57,25 @@
 @media (max-width: 650px) {
   .techs__list {
     display: grid;
-    grid-template-columns: 84px 84px;
+    grid-template-columns: repeat(2, max-content);
     gap: 10px;
+  }
+}
+
+@media (max-width: 540px) {
+  .techs {
+    background-color: #fff;
+  }
+  
+  .techs__heading {
+    font-size: 30px;
+    letter-spacing: -1.2px;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 1.45;
+    letter-spacing: -0.44px;
+    margin-bottom: 50px;
   }
 }

@@ -20,7 +20,7 @@ const Header = ({ isLoggedIn, pathName }) => {
       <Link to="/">
         <img src={logo} alt="Логотип" className="header__logo" />
       </Link>
-      {isLoggedIn ? (
+      {!isLoggedIn ? (
         <nav className="header__nav">
           <Link to="/signup" className="header__link link">Регистрация</Link>
           <Link to="/signin" className="header__link header__button button">Войти</Link>

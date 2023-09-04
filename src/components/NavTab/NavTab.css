@@ -28,3 +28,14 @@
     transition: all .08s linear;
   }
 }
+
+@media (max-width: 540px) {
+  .navtab {
+    column-gap: 20px;
+  }
+
+  .navtab__link {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}

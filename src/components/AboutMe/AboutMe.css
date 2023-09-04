@@ -65,6 +65,7 @@
   height: 327px;
   border-radius: 10px;
   background-color: salmon;
+  object-fit: cover;
 }
 
 @media (max-width: 820px) {
@@ -101,9 +102,20 @@
 }
 
 @media (max-width: 650px) {
+  .about-me {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
   .about-me__container {
     flex-direction: column;
     row-gap: 40px;
+    padding-bottom: 70px;
+  }
+
+  .about-me__image {
+    width: 292px;
+    height: 352px;
   }
 
   .about-me__info {
@@ -113,5 +125,15 @@
 
   .about-me__profession {
     margin-top: 20px;
+    font-size: 11px;
+  }
+
+  .about-me__name {
+    font-size: 30px;
+  }
+
+  .about-me__description {
+    font-size: 11px;
   }
 }
+

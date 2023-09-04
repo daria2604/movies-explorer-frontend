@@ -102,4 +102,36 @@
     width: 339px;
     height: 190px;
   }
+
+  .card__info {
+    padding: 0;
+    justify-content: space-between;
+    column-gap: 0;
+  }
+}
+
+@media (max-width: 710px) {
+  .card__image-container {
+    width: 300px;
+    height: 168px;
+  }
+}
+
+@media (max-width: 640px) {
+  .card__image-container {
+    width: 339px;
+    height: 190px;
+  }
+}
+
+@media (max-width: 425px) {
+  .card__image-container {
+    width: 300px;
+    height: 168px;
+  }
+
+  .card__button {
+    top: 10px;
+    right: 10px;
+  }
 }

@@ -14,13 +14,13 @@ const Form = ({
     <>
       <form className={`form form_type_${formType}`}>
         <fieldset className="form__fieldset">{children}</fieldset>
-        <button type="submit" className="form__submit-button">
+        <button type="submit" className="button form__submit-button">
           {buttonText}
         </button>
       </form>
       <div className="form__caption">
         <p className="form__caption-text">{captionText}</p>
-        <Link to={path} className="form__link">
+        <Link to={path} className="link form__link">
           {linkText}
         </Link>
       </div>

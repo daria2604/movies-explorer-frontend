@@ -7,7 +7,7 @@
 
 .cards__container {
   display: grid;
-  grid-template-columns: 360px 360px 360px;
+  grid-template-columns: repeat(3, max-content);
   gap: 60px 30px;
   justify-content: center;
   padding: 70px 0 26px 0;
@@ -45,18 +45,32 @@
 
 @media (max-width: 1024px) {
   .cards__container {
-    grid-template-columns: 360px 360px;
+    grid-template-columns: repeat(2, max-content);
     padding-bottom: 10px;
   }
 }
 
 @media (max-width: 820px) {
   .cards__container {
-    grid-template-columns: 339px 339px;
-    row-gap: 47px;
+    row-gap: 45px;
   }
 
   .cards__container_path_saved {
     padding-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .cards__container {
+    grid-template-columns: max-content;
+    padding-top: 40px;
+    row-gap: 36px;
+  }
+}
+
+@media (max-width: 425px) {
+  .cards__button {
+    padding: 11px 0 9px 0;
+    width: 240px;
   }
 }

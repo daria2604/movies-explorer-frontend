@@ -20,3 +20,7 @@
   font-size: 13px;
   font-weight: 400;
 }
+
+.form__input_type_error {
+  color: #FF4062;
+}

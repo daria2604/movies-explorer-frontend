@@ -31,3 +31,19 @@
     top: 326px;
   }
 }
+
+@media (max-width: 540px) {
+  .promo__image {
+    width: 248px;
+    height: 248px;
+    padding: 142px 0 180px 0;
+  }
+
+  .promo__heading {
+    font-size: 31px;
+    line-height: 1.25;
+    letter-spacing: -1.24px;
+    padding: 0 10px;
+    top: 207px;
+  }
+}
