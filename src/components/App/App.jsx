@@ -12,7 +12,7 @@ import NotFound from "../NotFound/NotFound";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState();
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="root">
