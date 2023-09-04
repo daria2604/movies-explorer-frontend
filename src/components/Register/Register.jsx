@@ -19,6 +19,7 @@ const Register = () => {
           inputName={"name"}
           label={"Имя"}
           placeholderText={'Введите имя'}
+          maxLength={30}
         />
         <FormInput
           inputType={"email"}
@@ -31,6 +32,7 @@ const Register = () => {
           inputName={"password"}
           label={"Пароль"}
           placeholderText={'Введите пароль'}
+          maxLength={16}
         />
       </Form>
     </Auth>
