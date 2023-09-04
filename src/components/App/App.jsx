@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import "./App.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -13,7 +12,7 @@ import NotFound from "../NotFound/NotFound";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState();
-  const [isLoggedIn, setIsLoggedIn] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   return (
     <div className="root">
@@ -27,7 +26,7 @@ const App = () => {
             </Route>
             <Route path='/saved-movies' element={<SavedMovies isLoggedIn={isLoggedIn}/>}>
             </Route>
-            <Route path='/profile' element={<Profile />}>
+            <Route path='/profile' element={<Profile isLoggedIn={isLoggedIn}/>}>
             </Route>
             <Route path='/signup' element={<Register />}>
             </Route>
