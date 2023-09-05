@@ -28,7 +28,9 @@ const Header = ({ isLoggedIn, pathName }) => {
           </nav>
         ) : (
           <>
-            <button className="header__menu-button" onClick={handleOpen}></button>
+            <button className="header__menu-burger button" onClick={handleOpen}>
+                <span className="header__menu-button"></span>
+            </button>
             <Navigation isOpen={isOpen} onClose={handleClose}/>
           </>
         )}

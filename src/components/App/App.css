@@ -24,6 +24,8 @@
 }
 
 .button {
+  cursor: pointer;
+
   &:hover {
     opacity: .8;
     transition: all .2s linear;
@@ -31,6 +33,8 @@
 }
 
 .link {
+  cursor: pointer;
+
   &:hover {
     opacity: .7;
     transition: all .2s linear;
