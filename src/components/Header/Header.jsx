@@ -17,21 +17,22 @@ const Header = ({ isLoggedIn, pathName }) => {
 
   return (
     <header className={`header header_path_${pathName}`}>
-      <Link to="/">
-        <img src={logo} alt="Логотип" className="header__logo" />
-      </Link>
-      {!isLoggedIn ? (
-        <nav className="header__nav">
-          <Link to="/signup" className="header__link link">Регистрация</Link>
-          <Link to="/signin" className="header__link header__button button">Войти</Link>
-        </nav>
-      ) : (
-        <>
-          <button className="header__menu-button" onClick={handleOpen}></button>
-          <Navigation isOpen={isOpen} onClose={handleClose}/>
-        </>
-      )}
-      
+      <div className="container header__container">
+        <Link to="/">
+          <img src={logo} alt="Логотип" className="header__logo" />
+        </Link>
+        {!isLoggedIn ? (
+          <nav className="header__nav">
+            <Link to="/signup" className="header__link link">Регистрация</Link>
+            <Link to="/signin" className="header__link header__button button">Войти</Link>
+          </nav>
+        ) : (
+          <>
+            <button className="header__menu-button" onClick={handleOpen}></button>
+            <Navigation isOpen={isOpen} onClose={handleClose}/>
+          </>
+        )}
+      </div>
     </header>
   );
 };

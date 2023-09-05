@@ -5,7 +5,7 @@ const Page = ({ isLoggedIn, className, pathName, children }) => {
   return (
     <>
       <Header isLoggedIn={isLoggedIn} pathName={pathName} />
-      <main className={className}>{children}</main>
+      <main className={`${className} ${className !== "main" ? "container" : ""}`}>{children}</main>
     </>
   );
 };

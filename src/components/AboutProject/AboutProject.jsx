@@ -5,7 +5,7 @@ import Section from "../Section/Section";
 const AboutProject = () => {
   return (
     <Section
-      className={"about-project"}
+      className={"about-project container"}
       heading={"О проекте"}
       id={"aboutProject"}
     >
