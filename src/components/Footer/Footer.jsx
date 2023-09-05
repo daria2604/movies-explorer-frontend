@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="footer__container">
         <span className="footer__copyright">&copy; 2023</span>
         <div className="footer__yandex">
-          <p className="footer__yandex-title">Яндекс.Практикум</p>
+          <a href="https://practicum.yandex.ru/" target="blank" className="link footer__yandex-title">Яндекс.Практикум</a>
           <a href="https://github.com/yandex-practicum" target="blank" className="link footer__yandex-link">Github</a>
         </div>
       </div>

@@ -98,6 +98,10 @@
     column-gap: 14px;
   }
 
+  .header__button {
+    padding: 5px 12px;
+  }
+
   .header__menu-burger {
     padding: 9px;
   }

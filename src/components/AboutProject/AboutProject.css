@@ -64,6 +64,11 @@
 @media (max-width: 820px) {
   .about-project__info {
     column-gap: 30px;
+    margin-bottom: 93px;
+  }
+
+  .about-project__column {
+    row-gap: 22px;
   }
 
   .about-project__text {

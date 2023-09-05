@@ -69,6 +69,11 @@
 }
 
 @media (max-width: 820px) {
+  .about-me {
+    padding-top: 90px;
+    padding-bottom: 80px;
+  }
+
   .about-me__container {
     padding-bottom: 90px;
   }
@@ -126,14 +131,27 @@
   .about-me__profession {
     margin-top: 20px;
     font-size: 11px;
+    line-height: 1.45;
   }
 
   .about-me__name {
+    line-height: normal;
     font-size: 30px;
   }
 
   .about-me__description {
     font-size: 11px;
+    line-height: 1.45;
   }
 }
 
+@media (max-width: 540px) {
+  .about-me {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .about-me__container {
+    padding-top: 60px;
+  }
+}
