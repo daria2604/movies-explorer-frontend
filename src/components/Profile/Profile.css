@@ -124,7 +124,6 @@
 @media (max-width: 820px) {
   .profile {
     padding-top: 236px;
-    padding-bottom: 0;
     row-gap: 96px;
   }
   .profile__button-container {

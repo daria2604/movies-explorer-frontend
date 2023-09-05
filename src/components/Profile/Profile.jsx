@@ -26,6 +26,7 @@ const Profile = ({ isLoggedIn }) => {
               type="text"
               className="profile__input profile__input_type_name"
               name="profileName"
+              id="profileName"
               value="Дарья"
               disabled
             />
@@ -37,6 +38,7 @@ const Profile = ({ isLoggedIn }) => {
               type="email"
               className="profile__input profile__input_type_email"
               name="profileEmail"
+              id="profileEmail"
               value="pochta@yandex.ru"
               disabled
             />

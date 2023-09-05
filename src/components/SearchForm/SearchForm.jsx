@@ -10,7 +10,7 @@ const SearchForm = () => {
   }
 
   return (
-    <section className="search">
+    <div className="search">
       <form className="search__form">
         <div className="search__wrap">
           <div className="search__input-wrap">
@@ -23,7 +23,7 @@ const SearchForm = () => {
           <FilterCheckbox isOn={toggle} handleToggle={handleToggleSwitcher} />
         </div>
         </form>
-    </section>
+    </div>
   )
 };
 

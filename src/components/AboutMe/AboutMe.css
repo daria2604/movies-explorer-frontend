@@ -7,6 +7,7 @@
   display: flex;
   justify-content: space-between;
   padding: 66px 0 100px 0;
+  column-gap: 49px;
 }
 
 .about-me__info {
@@ -116,6 +117,7 @@
     flex-direction: column;
     row-gap: 40px;
     padding-bottom: 70px;
+    align-items: center;
   }
 
   .about-me__image {
@@ -126,6 +128,10 @@
   .about-me__info {
     order: 2;
     row-gap: 40px;
+  }
+
+  .about-me__info-wrap {
+    align-items: center;
   }
 
   .about-me__profession {
@@ -153,5 +159,11 @@
 
   .about-me__container {
     padding-top: 60px;
+  }
+}
+
+@media (max-width: 425px) {
+  .about-me__info-wrap {
+    align-items: flex-start;
   }
 }

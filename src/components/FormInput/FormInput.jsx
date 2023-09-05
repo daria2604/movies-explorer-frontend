@@ -11,6 +11,7 @@ const FormInput = ({ inputName, inputType, inputValue, placeholderText, label, m
       <input
         type={inputType}
         name={inputName}
+        id={inputName}
         className={`form__input form__input_type_${inputName}`}
         value={inputValue}
         placeholder={placeholderText}

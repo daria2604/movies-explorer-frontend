@@ -9,7 +9,7 @@ const MoviesCardList = () => {
   const location = useLocation();
 
   return (
-    <section className="cards">
+    <div className="cards">
       {location.pathname === "/movies" && (
         <>
           <div className="cards__container">
@@ -33,7 +33,7 @@ const MoviesCardList = () => {
           </div>
         </>
       )}
-    </section>
+    </div>
   );
 };
 
