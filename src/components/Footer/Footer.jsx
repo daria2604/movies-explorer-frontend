@@ -1,12 +1,9 @@
 import React from "react";
 import './Footer.css';
-import { useLocation } from "react-router-dom";
 
 const Footer = () => {
-  const location = useLocation();
-
   return (
-    <footer className={`footer ${location.pathname === '/' ? 'footer_path_main' : ''} container`}>
+    <footer className="footer container">
       <p className="footer__title">Учебный проект Яндекс.Практикум х BeatFilm.</p>
       <div className="footer__container">
         <span className="footer__copyright">&copy; 2023</span>

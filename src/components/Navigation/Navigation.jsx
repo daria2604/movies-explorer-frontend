@@ -7,7 +7,7 @@ const Navigation = ({ isOpen, onClose }) => {
 
   return (
     <nav className={`navigation ${isOpen ? 'navigation_opened' : ''}`}>
-      <button type="button" className="navigation__close-button" onClick={onClose}></button>
+      <button type="button" className="button navigation__close-button" onClick={onClose}></button>
       <div className="navigation__links">
         <Link
           to="/"
