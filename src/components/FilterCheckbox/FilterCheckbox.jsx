@@ -8,7 +8,7 @@ const FilterCheckbox = ({ isOn, handleToggle }) => {
         type="checkbox"
         name="switcher"
         id="switcher"
-        className="search__input_visually-hidden"
+        className="visually-hidden"
         checked={isOn}
         onChange={handleToggle}
       />

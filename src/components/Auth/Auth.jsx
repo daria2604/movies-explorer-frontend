@@ -3,7 +3,7 @@ import "./Auth.css";
 import logo from "../../images/logo.svg";
 import { Link } from "react-router-dom";
 
-const Auth = ({ heading, children }) => {
+const Auth = ({ heading, children, captionText, path, linkText }) => {
   return (
     <div className="auth">
       <header className="auth__header">
@@ -13,6 +13,12 @@ const Auth = ({ heading, children }) => {
         <h1 className="auth__heading">{heading}</h1>
       </header>
       {children}
+      <div className="auth__caption">
+        <p className="auth__caption-text">{captionText}</p>
+        <Link to={path} className="link auth__link">
+          {linkText}
+        </Link>
+      </div>
     </div>
   );
 };

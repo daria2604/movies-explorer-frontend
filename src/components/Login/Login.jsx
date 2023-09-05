@@ -6,13 +6,12 @@ import FormInput from "../FormInput/FormInput";
 
 const Login = () => {
   return (
-    <Auth heading={'Рады видеть!'}>
+    <Auth heading={'Рады видеть!'} captionText={"Ещё не зарегистрированы?"}
+    path={"/signup"}
+    linkText={"Регистрация"}>
       <Form
         formType={"login"}
         buttonText={"Войти"}
-        captionText={"Ещё не зарегистрированы?"}
-        path={"/signup"}
-        linkText={"Регистрация"}
       >
         <FormInput
           inputType={"email"}

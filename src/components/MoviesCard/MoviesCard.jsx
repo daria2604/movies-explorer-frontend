@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 const MoviesCard = ({ card, isSaved }) => {
   const [hover, setHover] = useState(false);
   const location = useLocation();
-  const imageClassName = (`card__image ${!isSaved ? '' : 'card__cursor_hide'}`);
+  const imageClassName = (`card__image ${!isSaved ? '' : 'no-cursor'}`);
   const buttonSaveClassName = (hover ? 'card__save-button' : 'card__button_hide');
   const buttonRemoveClassName = (hover ? 'card__remove-icon' : 'card__button_hide');
 
@@ -20,7 +20,7 @@ const MoviesCard = ({ card, isSaved }) => {
           <>
             <img src={card.link} alt={`Обложка фильма «${card.title}»`} className={imageClassName} />
             {!isSaved ? (
-              <button type="button" className={`card__button ${buttonSaveClassName}`}>Сохранить</button>
+              <button type="button" className={`button card__button ${buttonSaveClassName}`}>Сохранить</button>
             ) : (
               <span className="card__button card__save-icon"></span>
             )}

@@ -6,13 +6,10 @@ import Form from "../Form/Form";
 
 const Register = () => {
   return (
-    <Auth heading={"Добро пожаловать!"}>
+    <Auth heading={"Добро пожаловать!"} captionText={"Уже зарегистрированы?"} path={"/signin"} linkText={"Войти"}>
       <Form
         formType={"register"}
         buttonText={"Зарегистрироваться"}
-        captionText={"Уже зарегистрированы?"}
-        path={"/signin"}
-        linkText={"Войти"}
       >
         <FormInput
           inputType={"text"}

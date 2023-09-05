@@ -30,7 +30,7 @@
   display: none;
 }
 
-.card__cursor_hide {
+.no-cursor {
   cursor: unset;
 }
 
@@ -44,12 +44,6 @@
   background-color: #F9F9F9;
   padding: 6px 7px;
   border: none;
-  cursor: pointer;
-
-  &:hover {
-    opacity: .8;
-    transition: all .2s linear;
-  }
 }
 
 .card__save-icon {
@@ -62,12 +56,6 @@
   background: url(../../images/remove-icon.svg) no-repeat center;
   width: 21px;
   height: 21px;
-  cursor: pointer;
-
-  &:hover {
-    opacity: .8;
-    transition: all .2s linear;
-  }
 }
 
 .card__info {

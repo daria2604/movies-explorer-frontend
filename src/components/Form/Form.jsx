@@ -1,13 +1,9 @@
 import React from "react";
 import './Form.css';
-import { Link } from "react-router-dom";
 
 const Form = ({
   formType,
   buttonText,
-  captionText,
-  path,
-  linkText,
   children,
 }) => {
   return (
@@ -18,12 +14,6 @@ const Form = ({
           {buttonText}
         </button>
       </form>
-      <div className="form__caption">
-        <p className="form__caption-text">{captionText}</p>
-        <Link to={path} className="link form__link">
-          {linkText}
-        </Link>
-      </div>
     </>
   );
 };
