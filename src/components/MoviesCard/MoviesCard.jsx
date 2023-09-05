@@ -28,7 +28,7 @@ const MoviesCard = ({ card, isSaved }) => {
         )}
         {location.pathname === '/saved-movies' && (
           <>
-            <img src={card.link} alt="" className='card__image' />
+            <img src={card.link} alt={`Обложка фильма «${card.title}»`} className='card__image' />
             <span className={`card__button ${buttonRemoveClassName}`}></span>
           </>
         )}
