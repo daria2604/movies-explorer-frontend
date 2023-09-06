@@ -36,6 +36,13 @@ input[type="checkbox"] + .search__switcher_active {
   background: url(../../images/switcher-active.svg) no-repeat center;
 }
 
+@media (max-width: 768px) {
+  .search__checkbox {
+    padding-left: 20px; 
+    padding-right: 20px;
+  }
+}
+
 @media (max-width: 590px) {
   .search__checkbox {
     border-left:  none;

@@ -86,6 +86,10 @@
 
 
 @media (max-width: 820px) {
+  .card {
+    row-gap: 25px;
+  }
+
   .card__image-container {
     width: 339px;
     height: 190px;
@@ -98,14 +102,14 @@
   }
 }
 
-@media (max-width: 710px) {
+@media (max-width: 720px) {
   .card__image-container {
     width: 300px;
     height: 168px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 650px) {
   .card__image-container {
     width: 339px;
     height: 190px;
