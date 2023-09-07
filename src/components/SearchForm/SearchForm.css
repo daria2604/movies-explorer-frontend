@@ -1,0 +1,118 @@
+.search {
+  padding: 70px 0;
+  border-bottom: 1px solid #E8E8E8;
+  margin: 0 70px 10px 70px;
+}
+
+.search__form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 9px;
+  background: #FDFDFD;
+  box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, .08);
+
+}
+
+.search__wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 19px;
+  column-gap: 22px;
+  width: 100%;
+}
+
+.search__icon {
+  display: block;
+  background: url(../../images/search.svg) no-repeat center;
+  width: 34px;
+  height: 34px;
+}
+
+.search__input-wrap {
+  display: flex;
+  column-gap: 10px;
+  flex-grow: 1;
+}
+
+.search__input {
+  border: none;
+  outline: none;
+  padding: 0;
+  flex-grow: 1;
+  border-bottom: 1px solid transparent;
+
+  &::placeholder {
+    color: #A0A0A0;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  &:focus {
+    border-bottom: 1px solid #A0A0A0;
+  }
+}
+
+.search__button {
+  border: none;
+  border-radius: 48px;
+  padding: 8px 12px;
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+@media (max-width: 820px) {
+  .search {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .search {
+    padding-top: 80px;
+    padding-bottom: 110px;
+  }
+}
+
+@media (max-width: 590px) {
+  .search {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 45px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .search__form {
+    flex-direction: column;
+    row-gap: 45px;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    margin: 0 10px;
+  }
+
+  .search__wrap {
+    border-radius: 9px;
+    background: #FDFDFD;
+    box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, .08);
+    padding-top: 19px;
+    padding-bottom: 19px;
+  }
+
+  .search__icon {
+    display: none;
+  }
+
+  .search__input::placeholder {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
