@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import Main from "../Main/Main";
@@ -22,7 +23,7 @@ const App = () => {
             <Route path="/" element={
               <Main isLoggedIn={isLoggedIn} />
             }></Route>
-            <Route path='/movies' element={<Movies isLoggedIn={isLoggedIn}/>}>
+            <Route path='/movies' element={<Movies isLoggedIn={isLoggedIn} />}>
             </Route>
             <Route path='/saved-movies' element={<SavedMovies isLoggedIn={isLoggedIn}/>}>
             </Route>

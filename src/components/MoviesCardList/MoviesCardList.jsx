@@ -1,20 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { movies } from "../../utils/movies";
 import { savedMovies } from "../../utils/savedMovies";
 import { useLocation } from "react-router-dom";
+import moviesApi from "../../utils/MoviesApi";
 
 const MoviesCardList = () => {
   const location = useLocation();
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    moviesApi.getMovies()
+    .then((data) => {
+      setMovies(data)
+      console.log(data)
+    })
+    .catch(console.error)
+  }, [])
 
   return (
     <section className="cards">
       {location.pathname === "/movies" && (
         <>
           <div className="cards__container">
-            {movies.map((card) => (
-              <MoviesCard key={card._id} card={card} isSaved={card.saved} />
+            {movies.map((movie) => (
+              <MoviesCard key={movie.id} movie={movie} isSaved={movie.saved} />
             ))}
           </div>
           <div className="cards__button-container">
@@ -25,8 +35,8 @@ const MoviesCardList = () => {
       {location.pathname === "/saved-movies" && (
         <>
           <div className={`cards__container ${savedMovies.length > 3 ? '' : 'cards__container_path_saved'}`}>
-            {savedMovies.map((card) => (
-              <MoviesCard key={card._id} card={card} />
+            {savedMovies.map((movie) => (
+              <MoviesCard key={movie._id} movie={movie} />
             ))}
           </div>
           <div className="cards__button-container">

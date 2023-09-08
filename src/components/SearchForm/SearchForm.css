@@ -55,6 +55,10 @@
   }
 }
 
+.search__input-error {
+  border-bottom: 1px solid #FF004C;
+}
+
 .search__button {
   border: none;
   border-radius: 48px;

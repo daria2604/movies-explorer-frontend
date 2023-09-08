@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Profile.css";
 import Page from "../Page/Page";
 import { Link } from "react-router-dom";
-import Error from "../Error/Error";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const Profile = ({ isLoggedIn }) => {
   const [isClicked, setIsClicked] = useState(false);
@@ -63,7 +63,7 @@ const Profile = ({ isLoggedIn }) => {
             </>
           ) : (
             <>
-              <Error type={"profile__error"}></Error>
+              <ErrorMessage type={"profile__error"}></ErrorMessage>
               <button
                 type="submit"
                 className="button profile__button profile__submit-button"

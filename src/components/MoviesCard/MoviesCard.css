@@ -19,6 +19,12 @@
   cursor: pointer;
 }
 
+.card__image-link {
+  display: block;
+  width: inherit;
+  height: inherit;
+}
+
 .card__button {
   position: absolute;
   top: 14px;
@@ -82,6 +88,10 @@
   border-radius: 3px;
   background-color: #F9F9F9;
   width: 44px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 

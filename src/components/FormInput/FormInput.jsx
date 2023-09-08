@@ -1,6 +1,6 @@
 import React from "react";
 import './FormInput.css';
-import Error from "../Error/Error";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
 const FormInput = ({ inputName, inputType, inputValue, placeholderText, label, maxLength }) => {
   return (
@@ -19,7 +19,7 @@ const FormInput = ({ inputName, inputType, inputValue, placeholderText, label, m
         maxLength={maxLength}
         required
       />
-      <Error type={`form__input-error form__input-error_type_${inputName}`}></Error>
+      <ErrorMessage type={`form__input-error form__input-error_type_${inputName}`}></ErrorMessage>
     </div>
   );
 };
