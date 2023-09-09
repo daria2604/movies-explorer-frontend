@@ -1,47 +1,73 @@
 import React, { useEffect, useState } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { savedMovies } from "../../utils/savedMovies";
 import { useLocation } from "react-router-dom";
-import moviesApi from "../../utils/MoviesApi";
 
-const MoviesCardList = () => {
+const MoviesCardList = ({ movies, error }) => {
   const location = useLocation();
-  const [movies, setMovies] = useState([]);
+  const [maxMovies, setMaxMovies] = useState(0);
+  const [addCards, setAddCards] = useState(0);
+
+  const handleClick = () => {
+    setMaxMovies(maxMovies + addCards);
+  };
+
+  const setCards = () => {
+    const width = window.innerWidth;
+
+    if (width <= 650) {
+      setMaxMovies(5);
+      setAddCards(2);
+    } else if (width <= 1024) {
+      setMaxMovies(8);
+      setAddCards(2);
+    } else {
+      setMaxMovies(12);
+      setAddCards(3);
+    }
+  };
 
   useEffect(() => {
-    moviesApi.getMovies()
-    .then((data) => {
-      setMovies(data)
-      console.log(data)
-    })
-    .catch(console.error)
-  }, [])
+    setCards();
+
+    window.addEventListener("resize", () => {
+      setTimeout(() => {
+        setCards();
+      }, 1000)
+    });
+  }, []);
 
   return (
     <section className="cards">
-      {location.pathname === "/movies" && (
-        <>
-          <div className="cards__container">
-            {movies.map((movie) => (
-              <MoviesCard key={movie.id} movie={movie} isSaved={movie.saved} />
-            ))}
-          </div>
-          <div className="cards__button-container">
-            <button className="cards__button">Ещё</button>
-          </div>
-        </>
-      )}
-      {location.pathname === "/saved-movies" && (
-        <>
-          <div className={`cards__container ${savedMovies.length > 3 ? '' : 'cards__container_path_saved'}`}>
-            {savedMovies.map((movie) => (
-              <MoviesCard key={movie._id} movie={movie} />
-            ))}
-          </div>
-          <div className="cards__button-container">
-          </div>
-        </>
+      {error ? (
+        <span className="cards__error">{error}</span>
+      ) : (
+        location.pathname === "/movies" && (
+          <>
+            <div className="cards__container">
+              {movies.map((movie, length) => {
+                if (length < maxMovies) {
+                  return (
+                    <MoviesCard
+                      key={movie.id}
+                      movie={movie}
+                      isSaved={movie.saved}
+                    />
+                  );
+                }
+
+                return null;
+              })}
+            </div>
+            <div className="cards__button-container">
+              {movies.length > maxMovies ? (
+                <button className="cards__button" onClick={handleClick}>
+                  Ещё
+                </button>
+              ) : null}
+            </div>
+          </>
+        )
       )}
     </section>
   );

@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import moviesApi from "../../utils/MoviesApi";
 
-
-const SearchForm = () => {
+const SearchForm = ({ handleSearch }) => {
   const [toggle, setToggle] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchQueryError, setSearchQueryError] = useState("");
+  const [searchQueryError, setSearchQueryError] = useState(false);
 
   const handleToggleSwitcher = () => {
     setToggle(!toggle);
@@ -17,16 +15,13 @@ const SearchForm = () => {
     setSearchQuery(evt.target.value);
   };
 
-  const handleSearch = () => {
-    if (searchQuery === "") {
-      setSearchQueryError("Нужно ввести ключевое слово");
-    } else {
-      moviesApi.getMovies()
-    }
-  };
-
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    if (!searchQuery) {
+      setSearchQueryError(true);
+      return;
+    }
+    setSearchQueryError(false);
     handleSearch(evt);
   };
 
@@ -40,14 +35,12 @@ const SearchForm = () => {
               type="text"
               name="movie"
               className={`search__input ${
-                searchQueryError
-                  ? "error error_type_search search__input-error"
-                  : ""
+                searchQueryError ? "search__input-error" : ""
               }`}
-              placeholder="Фильм"
+              placeholder={!searchQueryError ? "Фильм" : "Нужно ввести ключевое слово"}
               autoComplete="off"
               onChange={handleInputChange}
-              value={searchQuery || searchQueryError}
+              value={searchQuery}
             />
           </div>
           <button type="submit" className="button search__button">

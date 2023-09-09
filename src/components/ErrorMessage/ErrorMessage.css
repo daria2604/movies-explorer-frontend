@@ -5,10 +5,6 @@
   font-weight: 400;
 }
 
-.error_type_search {
-  font-size: inherit;
-}
-
 @media (max-width: 425px) {
   .error {
     font-size: 10px;

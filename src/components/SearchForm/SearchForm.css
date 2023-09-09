@@ -42,6 +42,7 @@
   padding: 0;
   flex-grow: 1;
   border-bottom: 1px solid transparent;
+  background: #FDFDFD;
 
   &::placeholder {
     color: #A0A0A0;
@@ -55,7 +56,13 @@
   }
 }
 
-.search__input-error {
+.search__input-error::placeholder {
+  font-size: 14px;
+  color: #FF004C;
+}
+
+.search__input-error,
+.search__input-error:focus {
   border-bottom: 1px solid #FF004C;
 }
 
