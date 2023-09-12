@@ -22,8 +22,9 @@ const SearchForm = ({ handleSearch }) => {
       return;
     }
     setSearchQueryError(false);
-    handleSearch(evt);
+    handleSearch(searchQuery);
   };
+
 
   return (
     <section className="search">
@@ -37,7 +38,9 @@ const SearchForm = ({ handleSearch }) => {
               className={`search__input ${
                 searchQueryError ? "search__input-error" : ""
               }`}
-              placeholder={!searchQueryError ? "Фильм" : "Нужно ввести ключевое слово"}
+              placeholder={
+                !searchQueryError ? "Фильм" : "Нужно ввести ключевое слово"
+              }
               autoComplete="off"
               onChange={handleInputChange}
               value={searchQuery}
