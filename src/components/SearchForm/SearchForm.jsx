@@ -8,7 +8,9 @@ const SearchForm = ({ handleSearch, handleSwitch }) => {
   const [searchQueryError, setSearchQueryError] = useState(false);
 
   const handleToggleSwitcher = () => {
-    handleSearch(searchQuery, !toggle);
+    if(searchQuery) {
+      handleSearch(searchQuery, !toggle);
+    }
     handleSwitch();
     setToggle(!toggle);
   };
