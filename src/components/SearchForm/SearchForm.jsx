@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
-const SearchForm = ({ handleSearch }) => {
+const SearchForm = ({ handleSearch, handleSwitch }) => {
   const [toggle, setToggle] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchQueryError, setSearchQueryError] = useState(false);
 
   const handleToggleSwitcher = () => {
+    handleSearch(searchQuery, !toggle);
+    handleSwitch();
     setToggle(!toggle);
   };
 
@@ -22,7 +24,7 @@ const SearchForm = ({ handleSearch }) => {
       return;
     }
     setSearchQueryError(false);
-    handleSearch(searchQuery);
+    handleSearch(searchQuery, toggle);
   };
 
 

@@ -9,13 +9,15 @@ import {
   MOVIES_NOT_FOUND_ERROR_MESSAGE,
   REQUEST_ERROR_MESSAGE,
 } from "../../utils/errorMessages";
+import { filterMovies } from "../../utils/filter";
 
 const Movies = ({ isLoggedIn }) => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isShortMovieChecked, setIsShortMovieChecked] = useState(false);
 
-  const handleSearch = (query) => {
+  const handleSearch = (query, isShortMovieChecked) => {
     setIsLoading(true);
 
     const storedMovies = JSON.parse(localStorage.getItem("movies"));
@@ -25,7 +27,7 @@ const Movies = ({ isLoggedIn }) => {
         .then((data) => {
           if (data) {
             localStorage.setItem("movies", JSON.stringify(data));
-            filterStoredMovies(query);
+            filterStoredMovies(query, isShortMovieChecked);
           }
         })
         .catch(() => {
@@ -35,13 +37,13 @@ const Movies = ({ isLoggedIn }) => {
           setIsLoading(false);
         });
     } else {
-      filterStoredMovies(query);
+      filterStoredMovies(query, isShortMovieChecked);
     }
   };
 
-  const filterStoredMovies = (query) => {
+  const filterStoredMovies = (query, isShortMovieChecked) => {
     const storedMovies = JSON.parse(localStorage.getItem("movies"));
-    const filteredMovies = filterMoviesByQuery(storedMovies, query);
+    const filteredMovies = filterMovies(storedMovies, query, isShortMovieChecked);
 
     if (filteredMovies.length > 0) {
       setMovies(filteredMovies);
@@ -52,22 +54,13 @@ const Movies = ({ isLoggedIn }) => {
     setIsLoading(false)
   };
 
-  const filterMoviesByQuery = (movies, query) => {
-    const regex = new RegExp(query, "i");
-
-    const filteredMovies = movies.filter((movie) => {
-      const nameRU = movie.nameRU;
-      const nameEN = movie.nameEN;
-
-      return regex.test(nameRU) || regex.test(nameEN);
-    });
-
-    return filteredMovies;
+  const handleSwitch = () => {
+    setIsShortMovieChecked(!isShortMovieChecked)
   }
 
   return (
     <Page isLoggedIn={isLoggedIn} pathName={"movies"} className={"movies"}>
-      <SearchForm handleSearch={handleSearch} />
+      <SearchForm handleSearch={handleSearch} handleSwitch={handleSwitch}/>
       {isLoading ? (
         <Preloader />
       ) : (

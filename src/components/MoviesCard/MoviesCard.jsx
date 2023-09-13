@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
+import caluculateMovieDuration from "../../utils/movieDuration";
 
 const MoviesCard = ({ movie, isSaved }) => {
   const [hover, setHover] = useState(false);
@@ -11,11 +12,7 @@ const MoviesCard = ({ movie, isSaved }) => {
     ? "card__remove-icon"
     : "card__button_hide";
   const imageUrl = `https://api.nomoreparties.co/${movie.image.url}`;
-  const duration = `${
-    Math.floor(movie.duration / 60) === 0
-      ? ""
-      : `${Math.floor(movie.duration / 60)}ч`
-  } ${movie.duration % 60 === 0 ? "" : `${movie.duration % 60}м`}`;
+  const duration = caluculateMovieDuration(movie);
 
   const handleHover = () => {
     setHover(!hover);
