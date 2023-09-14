@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -17,10 +17,11 @@ const Movies = ({ isLoggedIn }) => {
   const [error, setError] = useState("");
   const [isShortMovieChecked, setIsShortMovieChecked] = useState(false);
 
+  const storedMovies = JSON.parse(localStorage.getItem("movies"));
+
   const handleSearch = (query, isShortMovieChecked) => {
     setIsLoading(true);
 
-    const storedMovies = JSON.parse(localStorage.getItem("movies"));
     if (!storedMovies) {
       moviesApi
         .getMovies()
@@ -42,8 +43,11 @@ const Movies = ({ isLoggedIn }) => {
   };
 
   const filterStoredMovies = (query, isShortMovieChecked) => {
-    const storedMovies = JSON.parse(localStorage.getItem("movies"));
-    const filteredMovies = filterMovies(storedMovies, query, isShortMovieChecked);
+    const filteredMovies = filterMovies(
+      storedMovies,
+      query,
+      isShortMovieChecked
+    );
 
     if (filteredMovies.length > 0) {
       setMovies(filteredMovies);
@@ -51,16 +55,16 @@ const Movies = ({ isLoggedIn }) => {
     } else {
       setError(MOVIES_NOT_FOUND_ERROR_MESSAGE);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   const handleSwitch = () => {
-    setIsShortMovieChecked(!isShortMovieChecked)
-  }
+    setIsShortMovieChecked(!isShortMovieChecked);
+  };
 
   return (
     <Page isLoggedIn={isLoggedIn} pathName={"movies"} className={"movies"}>
-      <SearchForm handleSearch={handleSearch} handleSwitch={handleSwitch}/>
+      <SearchForm handleSearch={handleSearch} handleSwitch={handleSwitch} filterMovies={filterStoredMovies}/>
       {isLoading ? (
         <Preloader />
       ) : (

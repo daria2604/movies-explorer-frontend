@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 
@@ -7,9 +7,29 @@ const SearchForm = ({ handleSearch, handleSwitch }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchQueryError, setSearchQueryError] = useState(false);
 
+  const movies = localStorage.getItem("movies");
+
+  useEffect(() => {
+    const isShortMovie = localStorage.getItem("isShortMovie");
+    const query = localStorage.getItem("query");
+
+    if (movies) {
+      if (query) {
+        setSearchQuery(query);
+        handleSearch(query, isShortMovie === "true");
+      }
+
+      if (isShortMovie === "true") {
+        setToggle(true);
+        handleSearch(query, true);
+      }
+    }
+  }, [movies]);
+
   const handleToggleSwitcher = () => {
-    if(searchQuery) {
+    if (searchQuery) {
       handleSearch(searchQuery, !toggle);
+      localStorage.setItem("isShortMovie", !toggle);
     }
     handleSwitch();
     setToggle(!toggle);
@@ -27,8 +47,9 @@ const SearchForm = ({ handleSearch, handleSwitch }) => {
     }
     setSearchQueryError(false);
     handleSearch(searchQuery, toggle);
+    localStorage.setItem("query", searchQuery);
+    localStorage.setItem("isShortMovie", toggle);
   };
-
 
   return (
     <section className="search">
