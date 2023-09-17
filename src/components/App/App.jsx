@@ -56,7 +56,6 @@ const App = () => {
         }
         setIsLoggedIn(true);
         getUserInfo();
-        setCurrentUser(data);
       })
       .catch(() => {
         setIsLoggedIn(false);
@@ -98,6 +97,7 @@ const App = () => {
         if (data) {
           setIsLoggedIn(true);
           setCurrentUser(data);
+          getUserInfo();
           navigate("/movies", { replace: true });
         } else {
           setIsLoggedIn(false);
