@@ -1,33 +1,69 @@
 import React from "react";
-import './Login.css';
+import "./Login.css";
 import Auth from "../Auth/Auth";
 import Form from "../Form/Form";
 import FormInput from "../FormInput/FormInput";
+import { useFormWithValidation } from "../../hooks/useFormAndValidation";
+import {
+  EMAIL_ERROR_MESSAGE,
+  PASSWORD_ERROR_MESSAGE,
+} from "../../utils/errorMessages";
 
-const Login = () => {
+const Login = ({ onLogin, error }) => {
+  const { isValid, handleChange, values, errors } = useFormWithValidation({});
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const { email, password } = values;
+
+    onLogin({ email, password });
+  };
+
   return (
-    <Auth heading={'Рады видеть!'} captionText={"Ещё не зарегистрированы?"}
-    path={"/signup"}
-    linkText={"Регистрация"}>
+    <Auth
+      heading={"Рады видеть!"}
+      captionText={"Ещё не зарегистрированы?"}
+      path={"/signup"}
+      linkText={"Регистрация"}
+    >
       <Form
         formType={"login"}
         buttonText={"Войти"}
+        onSubmit={handleSubmit}
+        isValid={isValid}
+        hasErrors={errors}
+        errorMessage={error}
       >
         <FormInput
           inputType={"email"}
           inputName={"email"}
+          inputValue={values?.email || ""}
+          minLength={2}
           label={"E-mail"}
-          placeholderText={'Ведите e-mail'}
+          placeholderText={"Введите e-mail"}
+          onChange={(evt) => {
+            handleChange(evt);
+          }}
+          hasErrors={errors?.email}
+          errorMessage={errors ? EMAIL_ERROR_MESSAGE : ""}
         />
         <FormInput
           inputType={"password"}
           inputName={"password"}
+          inputValue={values?.password || ""}
           label={"Пароль"}
-          placeholderText={'Введите пароль'}
+          placeholderText={"Введите пароль"}
+          minLength={5}
+          maxLength={16}
+          onChange={(evt) => {
+            handleChange(evt);
+          }}
+          hasErrors={errors?.password}
+          errorMessage={errors ? PASSWORD_ERROR_MESSAGE : ""}
         />
       </Form>
     </Auth>
-  )
+  );
 };
 
 export default Login;

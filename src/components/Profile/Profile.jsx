@@ -4,7 +4,7 @@ import Page from "../Page/Page";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
-const Profile = ({ isLoggedIn }) => {
+const Profile = ({ isLoggedIn, onLogout, userInfo }) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClick = () => {
@@ -15,9 +15,13 @@ const Profile = ({ isLoggedIn }) => {
     evt.preventDefault();
   };
 
+  const handleLogout = () => {
+    onLogout();
+  };
+
   return (
     <Page isLoggedIn={isLoggedIn} pathName={"profile"} className={"profile"}>
-      <h1 className="profile__heading">Привет, Дарья!</h1>
+      <h1 className="profile__heading">{`Привет ${userInfo.name}!`}</h1>
       <form className="profile__form">
         <fieldset className="profile__fieldset">
           <label htmlFor="profileName" className="profile__label">
@@ -27,7 +31,7 @@ const Profile = ({ isLoggedIn }) => {
               className="profile__input profile__input_type_name"
               name="profileName"
               id="profileName"
-              value="Дарья"
+              value={userInfo.name}
               disabled
             />
           </label>
@@ -39,7 +43,7 @@ const Profile = ({ isLoggedIn }) => {
               className="profile__input profile__input_type_email"
               name="profileEmail"
               id="profileEmail"
-              value="pochta@yandex.ru"
+              value={userInfo.email}
               disabled
             />
           </label>
@@ -55,6 +59,7 @@ const Profile = ({ isLoggedIn }) => {
                 Редактировать
               </button>
               <Link
+                onClick={handleLogout}
                 to="/signin"
                 className="profile__button profile__signout-button"
               >

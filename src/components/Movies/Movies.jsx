@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -64,7 +64,7 @@ const Movies = ({ isLoggedIn }) => {
 
   return (
     <Page isLoggedIn={isLoggedIn} pathName={"movies"} className={"movies"}>
-      <SearchForm handleSearch={handleSearch} handleSwitch={handleSwitch} filterMovies={filterStoredMovies}/>
+      <SearchForm handleSearch={handleSearch} handleSwitch={handleSwitch} />
       {isLoading ? (
         <Preloader />
       ) : (
