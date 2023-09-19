@@ -2,9 +2,9 @@ export const MOVIES_NOT_FOUND_ERROR_MESSAGE = "Ничего не найдено"
 export const REQUEST_ERROR_MESSAGE = "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз";
 export const DEFAULT_ERROR_MESSAGE = "Что-то пошло не так...";
 
-export const NAME_ERROR_MESSAGE = "Имя должно содержать от 2 до 30 символов.";
-export const EMAIL_ERROR_MESSAGE = "Пожалуйста, введите корректный E-mail.";
-export const PASSWORD_ERROR_MESSAGE = "Допустимая длина пароля 5-16 символов.";
+export const NAME_ERROR_MESSAGE = "Имя должно содержать только латиницу, кириллицу, пробел или дефис.";
+export const EMAIL_ERROR_MESSAGE = "Пожалуйста, введите корректный e-mail.";
+export const PASSWORD_ERROR_MESSAGE = "Пожалуйста, введите пароль.";
 
 export const PROFILE_UPDATE_ERROR_MESSAGE = "При обновлении профиля произошла ошибка.";
 export const EMAIL_CONFLICT_ERROR_MESSAGE = "Пользователь с таким email уже существует";

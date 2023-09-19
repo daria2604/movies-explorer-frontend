@@ -4,11 +4,6 @@ import Auth from "../Auth/Auth";
 import FormInput from "../FormInput/FormInput";
 import Form from "../Form/Form";
 import { useFormWithValidation } from "../../hooks/useFormAndValidation";
-import {
-  EMAIL_ERROR_MESSAGE,
-  NAME_ERROR_MESSAGE,
-  PASSWORD_ERROR_MESSAGE,
-} from "../../utils/errorMessages";
 
 const Register = ({ onRegister, error }) => {
   const { isValid, handleChange, values, errors } = useFormWithValidation({});
@@ -47,7 +42,7 @@ const Register = ({ onRegister, error }) => {
             handleChange(evt);
           }}
           hasErrors={errors?.name}
-          errorMessage={errors ? NAME_ERROR_MESSAGE : ""}
+          errorMessage={errors?.name}
         />
         <FormInput
           inputType={"email"}
@@ -60,7 +55,7 @@ const Register = ({ onRegister, error }) => {
             handleChange(evt);
           }}
           hasErrors={errors?.email}
-          errorMessage={errors ? EMAIL_ERROR_MESSAGE : ""}
+          errorMessage={errors?.email}
         />
         <FormInput
           inputType={"password"}
@@ -74,7 +69,7 @@ const Register = ({ onRegister, error }) => {
             handleChange(evt);
           }}
           hasErrors={errors?.password}
-          errorMessage={errors ? PASSWORD_ERROR_MESSAGE : ""}
+          errorMessage={errors?.password}
         />
       </Form>
     </Auth>

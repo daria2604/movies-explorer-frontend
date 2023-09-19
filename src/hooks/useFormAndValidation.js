@@ -1,20 +1,11 @@
 import React, { useCallback } from "react";
+import { emailRegex, nameRegex } from "../utils/regex";
+import {
+  EMAIL_ERROR_MESSAGE,
+  NAME_ERROR_MESSAGE,
+  PASSWORD_ERROR_MESSAGE,
+} from "../utils/errorMessages";
 
-//хук управления формой
-export function useForm() {
-  const [values, setValues] = React.useState({});
-
-  const handleChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
-    setValues({...values, [name]: value});
-  };
-
-  return {values, handleChange, setValues};
-}
-
-//хук управления формой и валидации формы
 export function useFormWithValidation(initialValues = {}) {
   const [values, setValues] = React.useState(initialValues);
   const [errors, setErrors] = React.useState({});
@@ -24,8 +15,24 @@ export function useFormWithValidation(initialValues = {}) {
     const target = event.target;
     const name = target.name;
     const value = target.value;
-    setValues({...values, [name]: value});
-    setErrors({...errors, [name]: target.validationMessage });
+
+    setValues({ ...values, [name]: value });
+
+    let errorMessage = target.validationMessage;
+
+    if (name === "email" && !emailRegex.test(value)) {
+      errorMessage = EMAIL_ERROR_MESSAGE;
+    }
+
+    if (name === "name" && !nameRegex.test(value)) {
+      errorMessage = NAME_ERROR_MESSAGE;
+    }
+
+    if (name === "password" && value.length === 0) {
+      errorMessage = PASSWORD_ERROR_MESSAGE;
+    }
+
+    setErrors({ ...errors, [name]: errorMessage });
     setIsValid(target.closest("form").checkValidity());
   };
 
@@ -38,5 +45,13 @@ export function useFormWithValidation(initialValues = {}) {
     [setValues, setErrors, setIsValid]
   );
 
-  return { values, handleChange, errors, isValid, setIsValid, setValues, resetForm };
+  return {
+    values,
+    handleChange,
+    errors,
+    isValid,
+    setIsValid,
+    setValues,
+    resetForm,
+  };
 }

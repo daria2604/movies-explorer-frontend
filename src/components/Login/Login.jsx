@@ -4,10 +4,6 @@ import Auth from "../Auth/Auth";
 import Form from "../Form/Form";
 import FormInput from "../FormInput/FormInput";
 import { useFormWithValidation } from "../../hooks/useFormAndValidation";
-import {
-  EMAIL_ERROR_MESSAGE,
-  PASSWORD_ERROR_MESSAGE,
-} from "../../utils/errorMessages";
 
 const Login = ({ onLogin, error }) => {
   const { isValid, handleChange, values, errors } = useFormWithValidation({});
@@ -45,7 +41,7 @@ const Login = ({ onLogin, error }) => {
             handleChange(evt);
           }}
           hasErrors={errors?.email}
-          errorMessage={errors ? EMAIL_ERROR_MESSAGE : ""}
+          errorMessage={errors?.email}
         />
         <FormInput
           inputType={"password"}
@@ -53,13 +49,11 @@ const Login = ({ onLogin, error }) => {
           inputValue={values?.password || ""}
           label={"Пароль"}
           placeholderText={"Введите пароль"}
-          minLength={5}
-          maxLength={16}
           onChange={(evt) => {
             handleChange(evt);
           }}
           hasErrors={errors?.password}
-          errorMessage={errors ? PASSWORD_ERROR_MESSAGE : ""}
+          errorMessage={errors?.password}
         />
       </Form>
     </Auth>

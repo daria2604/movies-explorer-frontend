@@ -6,12 +6,7 @@ import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { useFormWithValidation } from "../../hooks/useFormAndValidation";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-const Profile = ({
-  isLoggedIn,
-  onLogout,
-  onUpdateUserInfo,
-  errorMessage,
-}) => {
+const Profile = ({ isLoggedIn, onLogout, onUpdateUserInfo, errorMessage }) => {
   const currentUser = useContext(CurrentUserContext);
   const [isClicked, setIsClicked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
@@ -62,7 +57,7 @@ const Profile = ({
             <input
               type="text"
               className="profile__input profile__input_type_name"
-              name="profileName"
+              name="name"
               id="profileName"
               defaultValue={currentUser.name}
               disabled={isDisabled}
@@ -77,7 +72,7 @@ const Profile = ({
           </label>
           {!isValid && (
             <ErrorMessage type={"profile-input"} isActive={true}>
-              {errors?.profileName}
+              {errors?.name}
             </ErrorMessage>
           )}
           <label htmlFor="profileEmail" className="profile__label">
@@ -85,7 +80,7 @@ const Profile = ({
             <input
               type="email"
               className="profile__input profile__input_type_email"
-              name="profileEmail"
+              name="email"
               id="profileEmail"
               defaultValue={currentUser.email}
               disabled={isDisabled}
@@ -98,7 +93,7 @@ const Profile = ({
           </label>
           {!isValid && (
             <ErrorMessage type={"profile-input"} isActive={true}>
-              {errors?.profileEmail}
+              {errors?.email}
             </ErrorMessage>
           )}
         </fieldset>
