@@ -22,10 +22,6 @@ import {
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
-  const [userInfo, setUserInfo] = useState({
-    name: "",
-    email: "",
-  });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -69,8 +65,8 @@ const App = () => {
   const getUserInfo = () => {
     mainApi
       .getUserInfo()
-      .then((userInfo) => {
-        setUserInfo(userInfo.user);
+      .then((data) => {
+        setCurrentUser(data.user);
       })
       .catch(() => {
         setError(INCORRECT_TOKEN_ERROR_MESSAGE);
@@ -131,7 +127,6 @@ const App = () => {
         .updateUserInfo({ name, email })
         .then((data) => {
           setCurrentUser(data);
-          setUserInfo(data);
           resolve();
         })
         .catch((err) => {
@@ -179,7 +174,6 @@ const App = () => {
                   isLoggedIn={isLoggedIn}
                   element={Profile}
                   onLogout={handleLogout}
-                  userInfo={userInfo}
                   isLoading={isLoading}
                   onUpdateUserInfo={handleUpdateUserInfo}
                   errorMessage={error}

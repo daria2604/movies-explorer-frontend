@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import Page from "../Page/Page";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import { useFormWithValidation } from "../../hooks/useFormAndValidation";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const Profile = ({
   isLoggedIn,
   onLogout,
-  userInfo,
   onUpdateUserInfo,
   errorMessage,
 }) => {
+  const currentUser = useContext(CurrentUserContext);
   const [isClicked, setIsClicked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
   const { values, setValues, handleChange, isValid, setIsValid, errors } =
@@ -53,7 +54,7 @@ const Profile = ({
 
   return (
     <Page isLoggedIn={isLoggedIn} pathName={"profile"} className={"profile"}>
-      <h1 className="profile__heading">{`Привет ${userInfo.name}!`}</h1>
+      <h1 className="profile__heading">{`Привет ${currentUser.name}!`}</h1>
       <form className="profile__form" onSubmit={handleSubmit}>
         <fieldset className="profile__fieldset">
           <label htmlFor="profileName" className="profile__label">
@@ -63,7 +64,7 @@ const Profile = ({
               className="profile__input profile__input_type_name"
               name="profileName"
               id="profileName"
-              defaultValue={userInfo.name}
+              defaultValue={currentUser.name}
               disabled={isDisabled}
               minLength={2}
               maxLength={30}
@@ -86,7 +87,7 @@ const Profile = ({
               className="profile__input profile__input_type_email"
               name="profileEmail"
               id="profileEmail"
-              defaultValue={userInfo.email}
+              defaultValue={currentUser.email}
               disabled={isDisabled}
               onChange={(evt) => {
                 handleChange(evt);
@@ -133,16 +134,16 @@ const Profile = ({
                 type="submit"
                 className={`button profile__button profile__submit-button ${
                   !isValid ||
-                  (userInfo.name === values.name &&
-                    userInfo.email === values.email)
+                  (currentUser.name === values.name &&
+                    currentUser.email === values.email)
                     ? "button_disabled profile__submit-button_disabled"
                     : ""
                 }`}
                 disabled={
                   !isValid ||
                   isSubmitting ||
-                  (userInfo.name === values.name &&
-                    userInfo.email === values.email)
+                  (currentUser.name === values.name &&
+                    currentUser.email === values.email)
                 }
               >
                 {isSubmitting ? "Сохранение..." : "Сохранить"}
