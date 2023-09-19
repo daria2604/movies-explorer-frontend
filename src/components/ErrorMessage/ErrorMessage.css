@@ -9,6 +9,10 @@
   display: block;
 }
 
+.error_type_profile-input {
+  margin-top: 5px;
+}
+
 @media (max-width: 425px) {
   .error {
     font-size: 10px;

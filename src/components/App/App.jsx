@@ -16,6 +16,7 @@ import {
   EMAIL_CONFLICT_ERROR_MESSAGE,
   INCORRECT_TOKEN_ERROR_MESSAGE,
   LOGIN_ERROR_MESSAGE,
+  PROFILE_UPDATE_ERROR_MESSAGE,
   SERVER_ERROR_MESSAGE,
 } from "../../utils/errorMessages";
 
@@ -123,6 +124,28 @@ const App = () => {
       });
   };
 
+  const handleUpdateUserInfo = ({ name, email }) => {
+    setError(null)
+    return new Promise((resolve, reject) => {
+      mainApi
+        .updateUserInfo({ name, email })
+        .then((data) => {
+          setCurrentUser(data);
+          setUserInfo(data);
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+          if(err === 409) {
+            setError(EMAIL_CONFLICT_ERROR_MESSAGE)
+          } else {
+            setError(PROFILE_UPDATE_ERROR_MESSAGE);
+          }
+          
+        });
+    });
+  };
+
   return (
     <div className="root">
       <div className="page">
@@ -158,6 +181,8 @@ const App = () => {
                   onLogout={handleLogout}
                   userInfo={userInfo}
                   isLoading={isLoading}
+                  onUpdateUserInfo={handleUpdateUserInfo}
+                  errorMessage={error}
                 />
               }
             ></Route>

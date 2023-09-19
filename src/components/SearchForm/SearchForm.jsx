@@ -24,7 +24,7 @@ const SearchForm = ({ handleSearch, handleSwitch }) => {
         handleSearch(query, true);
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movies]);
 
   const handleToggleSwitcher = () => {
