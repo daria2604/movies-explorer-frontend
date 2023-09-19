@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
+import { useLocation } from "react-router-dom";
 
 const SearchForm = ({ handleSearch, handleSwitch }) => {
   const [toggle, setToggle] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchQueryError, setSearchQueryError] = useState(false);
+  const location = useLocation();
+
+  const prefix = location.pathname;
+  const queryKey = `${prefix}_query`;
+  const isShortMovieKey = `${prefix}_isShortMovie`;
 
   const movies = localStorage.getItem("movies");
 
   useEffect(() => {
-    const isShortMovie = localStorage.getItem("isShortMovie");
-    const query = localStorage.getItem("query");
+    const isShortMovie = localStorage.getItem(isShortMovieKey);
+    const query = localStorage.getItem(queryKey);
 
     if (movies) {
       if (query) {
@@ -30,7 +36,7 @@ const SearchForm = ({ handleSearch, handleSwitch }) => {
   const handleToggleSwitcher = () => {
     if (searchQuery) {
       handleSearch(searchQuery, !toggle);
-      localStorage.setItem("isShortMovie", !toggle);
+      localStorage.setItem(isShortMovieKey, !toggle);
     }
     handleSwitch();
     setToggle(!toggle);
@@ -48,8 +54,8 @@ const SearchForm = ({ handleSearch, handleSwitch }) => {
     }
     setSearchQueryError(false);
     handleSearch(searchQuery, toggle);
-    localStorage.setItem("query", searchQuery);
-    localStorage.setItem("isShortMovie", toggle);
+    localStorage.setItem(queryKey, searchQuery);
+    localStorage.setItem(isShortMovieKey, toggle);
   };
 
   return (
