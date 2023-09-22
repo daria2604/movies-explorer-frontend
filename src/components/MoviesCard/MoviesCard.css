@@ -27,6 +27,7 @@
 
 .card__button {
   position: absolute;
+  border: none;
   top: 14px;
   right: 14px;
   z-index: 1;
@@ -117,6 +118,8 @@
     width: 300px;
     height: 168px;
   }
+
+  
 }
 
 @media (max-width: 650px) {

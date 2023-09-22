@@ -94,7 +94,19 @@ class MainApi {
       method: "POST",
       headers: this.#headers,
       credentials: "include",
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        image: `https://api.nomoreparties.co${data.image.url}`,
+        trailerLink: data.trailerLink,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+        thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
+        movieId: data.id,
+      }),
     });
   }
 }

@@ -1,6 +1,7 @@
 export const MOVIES_NOT_FOUND_ERROR_MESSAGE = "Ничего не найдено";
 export const REQUEST_ERROR_MESSAGE = "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз";
 export const DEFAULT_ERROR_MESSAGE = "Что-то пошло не так...";
+export const NO_FAVS_ERROR_MESSAGE = "Вы еще ничего не добавили в избранное.";
 
 export const NAME_ERROR_MESSAGE = "Имя должно содержать только латиницу, кириллицу, пробел или дефис.";
 export const EMAIL_ERROR_MESSAGE = "Пожалуйста, введите корректный e-mail.";

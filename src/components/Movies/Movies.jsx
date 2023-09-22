@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Movies.css";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -8,16 +8,31 @@ import moviesApi from "../../utils/MoviesApi";
 import {
   MOVIES_NOT_FOUND_ERROR_MESSAGE,
   REQUEST_ERROR_MESSAGE,
+  SERVER_ERROR_MESSAGE,
 } from "../../utils/errorMessages";
 import { filterMovies } from "../../utils/filter";
+import mainApi from "../../utils/MainApi";
 
 const Movies = ({ isLoggedIn }) => {
   const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [isShortMovieChecked, setIsShortMovieChecked] = useState(false);
-
   const storedMovies = JSON.parse(localStorage.getItem("movies"));
+
+  // добавить фильмы пользователя
+  useEffect(() => {
+    mainApi
+      .getSavedMovies()
+      .then((data) => {
+        setSavedMovies(data);
+        localStorage.setItem("saved-movies", JSON.stringify(data));
+      })
+      .catch(() => {
+        setError(SERVER_ERROR_MESSAGE);
+      });
+  }, [savedMovies]);
 
   const handleSearch = (query, isShortMovieChecked) => {
     setIsLoading(true);
@@ -62,13 +77,44 @@ const Movies = ({ isLoggedIn }) => {
     setIsShortMovieChecked(!isShortMovieChecked);
   };
 
+  const handleCardButtonClick = (movie) => {
+    const isSaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
+
+    if (!isSaved) {
+      mainApi
+        .saveMovie(movie)
+        .then((newMovie) => {
+          setSavedMovies([newMovie, ...savedMovies]);
+          localStorage.setItem("saved-movies", JSON.stringify(savedMovies));
+        })
+        .catch(() => console.error);
+    } else {
+      const movieId = savedMovies.find((card) => card._id);
+
+      mainApi
+        .deleteMovie(movieId._id)
+        .then(() => {
+          const filteredMovies = savedMovies.filter(
+            (card) => card.movieId !== movie.id
+          );
+          setSavedMovies(filteredMovies);
+          localStorage.setItem("saved-movies", JSON.stringify(filteredMovies));
+        })
+        .catch(() => console.error);
+    }
+  };
+
   return (
     <Page isLoggedIn={isLoggedIn} pathName={"movies"} className={"movies"}>
       <SearchForm handleSearch={handleSearch} handleSwitch={handleSwitch} />
       {isLoading ? (
         <Preloader />
       ) : (
-        <MoviesCardList movies={movies} error={error} />
+        <MoviesCardList
+          movies={movies}
+          error={error}
+          handleClick={handleCardButtonClick}
+        />
       )}
     </Page>
   );

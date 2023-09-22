@@ -3,12 +3,12 @@ import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
 
-const MoviesCardList = ({ movies, error }) => {
+const MoviesCardList = ({ movies, error, handleClick }) => {
   const location = useLocation();
   const [maxMovies, setMaxMovies] = useState(0);
   const [addCards, setAddCards] = useState(0);
 
-  const handleClick = () => {
+  const handleButtonClick = () => {
     setMaxMovies(maxMovies + addCards);
   };
 
@@ -33,7 +33,7 @@ const MoviesCardList = ({ movies, error }) => {
     window.addEventListener("resize", () => {
       setTimeout(() => {
         setCards();
-      }, 1000)
+      }, 1000);
     });
   }, []);
 
@@ -42,32 +42,38 @@ const MoviesCardList = ({ movies, error }) => {
       {error ? (
         <span className="cards__error">{error}</span>
       ) : (
-        location.pathname === "/movies" && (
-          <>
-            <div className="cards__container">
-              {movies.map((movie, length) => {
-                if (length < maxMovies) {
-                  return (
-                    <MoviesCard
-                      key={movie.id}
-                      movie={movie}
-                      isSaved={movie.saved}
-                    />
-                  );
-                }
-
-                return null;
-              })}
-            </div>
-            <div className="cards__button-container">
-              {movies.length > maxMovies ? (
-                <button className="cards__button" onClick={handleClick}>
-                  Ещё
-                </button>
-              ) : null}
-            </div>
-          </>
-        )
+        <>
+          <div className="cards__container">
+            {movies
+              ? movies.map((movie, length) => {
+                  if (location.pathname === "/movies" && length < maxMovies) {
+                    return (
+                      <MoviesCard
+                        key={movie.id}
+                        movie={movie}
+                        handleClick={handleClick}
+                      />
+                    );
+                  } else {
+                    return (
+                      <MoviesCard
+                        key={movie._id}
+                        movie={movie}
+                        handleClick={handleClick}
+                      />
+                    );
+                  }
+                })
+              : null}
+          </div>
+          <div className="cards__button-container">
+            {location.pathname === "/movies" && movies.length > maxMovies ? (
+              <button className="cards__button" onClick={handleButtonClick}>
+                Ещё
+              </button>
+            ) : null}
+          </div>
+        </>
       )}
     </section>
   );

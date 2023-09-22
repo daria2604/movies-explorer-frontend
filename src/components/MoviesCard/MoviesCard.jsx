@@ -1,21 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 import caluculateMovieDuration from "../../utils/movieDuration";
 
-const MoviesCard = ({ movie, isSaved }) => {
+const MoviesCard = ({ movie, handleClick }) => {
   const [hover, setHover] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
   const location = useLocation();
+  const width = window.innerWidth;
+
   const imageClassName = `card__image ${!isSaved ? "" : "no-cursor"}`;
-  const buttonSaveClassName = hover ? "card__save-button" : "card__button_hide";
-  const buttonRemoveClassName = hover
-    ? "card__remove-icon"
-    : "card__button_hide";
-  const imageUrl = `https://api.nomoreparties.co/${movie.image.url}`;
+  const buttonSaveClassName =
+    width <= 768
+      ? "card__save-button"
+      : hover
+      ? "card__save-button"
+      : "card__button_hide";
+  const buttonRemoveClassName =
+    width <= 768
+      ? "card__remove-icon"
+      : hover
+      ? "card__remove-icon"
+      : "card__button_hide";
+  const imageUrl = `https://api.nomoreparties.co${movie.image.url}`;
   const duration = caluculateMovieDuration(movie);
+
+  useEffect(() => {
+    const savedMovies = JSON.parse(localStorage.getItem("saved-movies"));
+    if (savedMovies.some((card) => card.movieId === movie.id)) {
+      setIsSaved(true);
+    }
+  }, []);
 
   const handleHover = () => {
     setHover(!hover);
+  };
+
+  const handleCardButtonClick = () => {
+    if (!isSaved) {
+      handleClick(movie);
+      setIsSaved(true);
+    } else {
+      handleClick(movie);
+      setIsSaved(false);
+    }
+  };
+
+  const handleDeleteMovie = () => {
+    handleClick(movie);
+    setIsSaved(false);
   };
 
   return (
@@ -38,11 +71,15 @@ const MoviesCard = ({ movie, isSaved }) => {
               <button
                 type="button"
                 className={`button card__button ${buttonSaveClassName}`}
+                onClick={handleCardButtonClick}
               >
                 Сохранить
               </button>
             ) : (
-              <span className="card__button card__save-icon"></span>
+              <button
+                className="button card__button card__save-icon"
+                onClick={handleCardButtonClick}
+              ></button>
             )}
           </>
         )}
@@ -50,12 +87,15 @@ const MoviesCard = ({ movie, isSaved }) => {
           <>
             <a href={movie.trailerLink} className="card__image-link">
               <img
-                src={imageUrl}
+                src={movie.image}
                 alt={`Обложка фильма «${movie.nameRU}»`}
                 className={imageClassName}
               />
             </a>
-            <span className={`card__button ${buttonRemoveClassName}`}></span>
+            <button
+              className={`button card__button ${buttonRemoveClassName}`}
+              onClick={handleDeleteMovie}
+            ></button>
           </>
         )}
       </div>
