@@ -16,12 +16,11 @@ import mainApi from "../../utils/MainApi";
 const Movies = ({ isLoggedIn }) => {
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isSavedMoviesLoaded, setIsSavedMoviesLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [isShortMovieChecked, setIsShortMovieChecked] = useState(false);
   const storedMovies = JSON.parse(localStorage.getItem("movies"));
-
-  const [isSavedMoviesLoaded, setIsSavedMoviesLoaded] = useState(false);
 
   useEffect(() => {
     mainApi
@@ -36,9 +35,10 @@ const Movies = ({ isLoggedIn }) => {
       });
   }, []);
 
+  // сохранить загруженные фильмы, чтобы не было бесконечного цикла запросов к серверу
   useEffect(() => {
     if (isSavedMoviesLoaded) {
-      setSavedMovies(savedMovies)
+      setSavedMovies(savedMovies);
       localStorage.setItem("saved-movies", JSON.stringify(savedMovies));
     }
   }, [isSavedMoviesLoaded, savedMovies]);
@@ -67,11 +67,7 @@ const Movies = ({ isLoggedIn }) => {
   };
 
   const filterStoredMovies = (query, isShortMovieChecked) => {
-    const filteredMovies = filterMovies(
-      storedMovies,
-      query,
-      isShortMovieChecked
-    );
+    const filteredMovies = filterMovies(storedMovies, query, isShortMovieChecked);
 
     if (filteredMovies.length > 0) {
       setMovies(filteredMovies);

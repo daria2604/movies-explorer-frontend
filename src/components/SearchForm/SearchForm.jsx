@@ -19,19 +19,21 @@ const SearchForm = ({ handleSearch, handleSwitch }) => {
     const isShortMovie = localStorage.getItem(isShortMovieKey);
     const query = localStorage.getItem(queryKey);
 
-    if (movies) {
-      if (query) {
-        setSearchQuery(query);
-        handleSearch(query, isShortMovie === "true");
-      }
+    if (location.pathname === "/movies") {
+      if (movies) {
+        if (query) {
+          setSearchQuery(query);
+          handleSearch(query, isShortMovie === "true");
+        }
 
-      if (isShortMovie === "true") {
-        setToggle(true);
-        handleSearch(query, true);
+        if (isShortMovie === "true") {
+          setToggle(true);
+          handleSearch(query, true);
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [movies]);
+  }, []);
 
   const handleToggleSwitcher = () => {
     if (searchQuery) {
@@ -54,8 +56,8 @@ const SearchForm = ({ handleSearch, handleSwitch }) => {
     }
     setSearchQueryError(false);
     handleSearch(searchQuery, toggle);
-    localStorage.setItem(queryKey, searchQuery);
     localStorage.setItem(isShortMovieKey, toggle);
+    localStorage.setItem(queryKey, searchQuery);
   };
 
   return (
