@@ -101,7 +101,7 @@ class MainApi {
         year: data.year,
         description: data.description,
         image: `https://api.nomoreparties.co${data.image.url}`,
-        trailerLink: data.trailerLink,
+        trailer: data.trailerLink,
         nameRU: data.nameRU,
         nameEN: data.nameEN,
         thumbnail: `https://api.nomoreparties.co${data.image.formats.thumbnail.url}`,
@@ -112,7 +112,7 @@ class MainApi {
 }
 
 const mainApi = new MainApi({
-  baseUrl: "http://localhost:4000",
+  baseUrl: "https://api.movies.dvr.nomoredomainsicu.ru",
   headers: {
     "Content-Type": "application/json",
   },

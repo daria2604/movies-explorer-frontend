@@ -129,16 +129,16 @@ const Profile = ({ isLoggedIn, onLogout, onUpdateUserInfo, errorMessage }) => {
                 type="submit"
                 className={`button profile__button profile__submit-button ${
                   !isValid ||
-                  (currentUser.name === values.name &&
-                    currentUser.email === values.email)
+                  currentUser.name === values.name ||
+                  currentUser.email === values.email
                     ? "button_disabled profile__submit-button_disabled"
                     : ""
                 }`}
                 disabled={
                   !isValid ||
                   isSubmitting ||
-                  (currentUser.name === values.name &&
-                    currentUser.email === values.email)
+                  currentUser.name === values.name ||
+                  currentUser.email === values.email
                 }
               >
                 {isSubmitting ? "Сохранение..." : "Сохранить"}
