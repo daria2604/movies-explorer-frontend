@@ -45,14 +45,15 @@ const Movies = ({ isLoggedIn }) => {
 
   const handleSearch = (query, isShortMovieChecked) => {
     setIsLoading(true);
-
+  
     if (!storedMovies) {
       moviesApi
         .getMovies()
         .then((data) => {
           if (data) {
             localStorage.setItem("movies", JSON.stringify(data));
-            filterStoredMovies(query, isShortMovieChecked);
+            setMovies(data);
+            filterStoredMovies(query, isShortMovieChecked, data);
           }
         })
         .catch(() => {
@@ -62,12 +63,16 @@ const Movies = ({ isLoggedIn }) => {
           setIsLoading(false);
         });
     } else {
-      filterStoredMovies(query, isShortMovieChecked);
+      filterStoredMovies(query, isShortMovieChecked, storedMovies);
     }
   };
 
-  const filterStoredMovies = (query, isShortMovieChecked) => {
-    const filteredMovies = filterMovies(storedMovies, query, isShortMovieChecked);
+  const filterStoredMovies = (query, isShortMovieChecked, storedMovies) => {
+    const filteredMovies = filterMovies(
+      storedMovies,
+      query,
+      isShortMovieChecked
+    );
 
     if (filteredMovies.length > 0) {
       setMovies(filteredMovies);
