@@ -43,29 +43,31 @@ const MoviesCardList = ({ movies, error, handleClick }) => {
         <span className="cards__error">{error}</span>
       ) : (
         <>
-          <div className="cards__container">
-            {movies
-              ? movies.map((movie, length) => {
-                  if (location.pathname === "/movies" && length < maxMovies) {
-                    return (
-                      <MoviesCard
-                        key={movie.id}
-                        movie={movie}
-                        handleClick={handleClick}
-                      />
-                    );
-                  } else {
-                    return (
-                      <MoviesCard
-                        key={movie._id}
-                        movie={movie}
-                        handleClick={handleClick}
-                      />
-                    );
-                  }
-                })
-              : null}
-          </div>
+          <ul className="cards__container">
+            {movies.map((movie, length) => {
+              if (location.pathname === "/movies") {
+                if (length < maxMovies) {
+                  return (
+                    <MoviesCard
+                      key={movie.id}
+                      movie={movie}
+                      handleClick={handleClick}
+                    />
+                  );
+                } else {
+                  return null;
+                }
+              } else {
+                return (
+                  <MoviesCard
+                    key={movie._id}
+                    movie={movie}
+                    handleClick={handleClick}
+                  />
+                );
+              }
+            })}
+          </ul>
           <div className="cards__button-container">
             {location.pathname === "/movies" && movies.length > maxMovies ? (
               <button className="cards__button" onClick={handleButtonClick}>

@@ -30,7 +30,7 @@ const MoviesCard = ({ movie, handleClick }) => {
     if (savedMovies.some((card) => card.movieId === movie.id)) {
       setIsSaved(true);
     }
-  }, []);
+  }, [movie]);
 
   const handleHover = () => {
     setHover(!hover);
@@ -52,7 +52,7 @@ const MoviesCard = ({ movie, handleClick }) => {
   };
 
   return (
-    <div className="card">
+    <li className="card">
       <div
         className="card__image-container"
         onMouseEnter={handleHover}
@@ -103,7 +103,7 @@ const MoviesCard = ({ movie, handleClick }) => {
         <p className="card__title">{movie.nameRU}</p>
         <p className="card__duration">{duration}</p>
       </div>
-    </div>
+    </li>
   );
 };
 

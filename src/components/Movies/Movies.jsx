@@ -21,18 +21,27 @@ const Movies = ({ isLoggedIn }) => {
   const [isShortMovieChecked, setIsShortMovieChecked] = useState(false);
   const storedMovies = JSON.parse(localStorage.getItem("movies"));
 
-  // добавить фильмы пользователя
+  const [isSavedMoviesLoaded, setIsSavedMoviesLoaded] = useState(false);
+
   useEffect(() => {
     mainApi
       .getSavedMovies()
       .then((data) => {
         setSavedMovies(data);
+        setIsSavedMoviesLoaded(true);
         localStorage.setItem("saved-movies", JSON.stringify(data));
       })
       .catch(() => {
         setError(SERVER_ERROR_MESSAGE);
       });
-  }, [savedMovies]);
+  }, []);
+
+  useEffect(() => {
+    if (isSavedMoviesLoaded) {
+      setSavedMovies(savedMovies)
+      localStorage.setItem("saved-movies", JSON.stringify(savedMovies));
+    }
+  }, [isSavedMoviesLoaded, savedMovies]);
 
   const handleSearch = (query, isShortMovieChecked) => {
     setIsLoading(true);
@@ -78,14 +87,15 @@ const Movies = ({ isLoggedIn }) => {
   };
 
   const handleCardButtonClick = (movie) => {
-    const isSaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
+    const isSaved = savedMovies.some(
+      (savedMovie) => savedMovie.movieId === movie.id
+    );
 
     if (!isSaved) {
       mainApi
         .saveMovie(movie)
         .then((newMovie) => {
           setSavedMovies([newMovie, ...savedMovies]);
-          localStorage.setItem("saved-movies", JSON.stringify(savedMovies));
         })
         .catch(() => console.error);
     } else {
