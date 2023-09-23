@@ -10,8 +10,8 @@ const Profile = ({ isLoggedIn, onLogout, onUpdateUserInfo, errorMessage }) => {
   const currentUser = useContext(CurrentUserContext);
   const [isClicked, setIsClicked] = useState(false);
   const [isDisabled, setIsDisabled] = useState(true);
-  const { values, setValues, handleChange, isValid, setIsValid, errors } =
-    useFormWithValidation();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const { values, setValues, handleChange, isValid, setIsValid, errors } = useFormWithValidation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -43,6 +43,17 @@ const Profile = ({ isLoggedIn, onLogout, onUpdateUserInfo, errorMessage }) => {
       });
   };
 
+  const checkInputValue = (evt) => {
+    const { name, value } = evt.target;
+    handleChange(evt);
+
+    if (name === "name") {
+      setIsButtonDisabled(value === currentUser.name);
+    } else if (name === "email") {
+      setIsButtonDisabled(value === currentUser.email);
+    }
+  };
+
   const handleLogout = () => {
     onLogout();
   };
@@ -65,6 +76,7 @@ const Profile = ({ isLoggedIn, onLogout, onUpdateUserInfo, errorMessage }) => {
               maxLength={30}
               onChange={(evt) => {
                 handleChange(evt);
+                checkInputValue(evt);
                 setValues({ ...values, name: evt.target.value });
               }}
               required
@@ -86,6 +98,7 @@ const Profile = ({ isLoggedIn, onLogout, onUpdateUserInfo, errorMessage }) => {
               disabled={isDisabled}
               onChange={(evt) => {
                 handleChange(evt);
+                checkInputValue(evt);
                 setValues({ ...values, email: evt.target.value });
               }}
               required
@@ -128,18 +141,11 @@ const Profile = ({ isLoggedIn, onLogout, onUpdateUserInfo, errorMessage }) => {
               <button
                 type="submit"
                 className={`button profile__button profile__submit-button ${
-                  !isValid ||
-                  currentUser.name === values.name ||
-                  currentUser.email === values.email
+                  !isValid || isButtonDisabled
                     ? "button_disabled profile__submit-button_disabled"
                     : ""
                 }`}
-                disabled={
-                  !isValid ||
-                  isSubmitting ||
-                  currentUser.name === values.name ||
-                  currentUser.email === values.email
-                }
+                disabled={!isValid || isSubmitting || isButtonDisabled}
               >
                 {isSubmitting ? "Сохранение..." : "Сохранить"}
               </button>
