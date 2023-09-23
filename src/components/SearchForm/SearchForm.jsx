@@ -3,7 +3,7 @@ import "./SearchForm.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { useLocation } from "react-router-dom";
 
-const SearchForm = ({ handleSearch, handleSwitch }) => {
+const SearchForm = ({ handleSearch, handleSwitch, isSubmitting }) => {
   const [toggle, setToggle] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchQueryError, setSearchQueryError] = useState(false);
@@ -80,7 +80,7 @@ const SearchForm = ({ handleSearch, handleSwitch }) => {
               value={searchQuery}
             />
           </div>
-          <button type="submit" className="button search__button">
+          <button type="submit" className="button search__button" disabled={isSubmitting}>
             Найти
           </button>
         </div>

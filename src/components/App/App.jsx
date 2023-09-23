@@ -74,6 +74,7 @@ const App = () => {
   };
 
   const handleRegister = ({ name, email, password }) => {
+    setIsLoading(true)
     mainApi
       .register({ name, email, password })
       .then((data) => {
@@ -84,10 +85,14 @@ const App = () => {
       .catch(() => {
         setIsLoggedIn(false);
         setError(EMAIL_CONFLICT_ERROR_MESSAGE);
-      });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   };
 
   const handleLogin = ({ email, password }) => {
+    setIsLoading(true);
     mainApi
       .login({ email, password })
       .then((data) => {
@@ -104,7 +109,10 @@ const App = () => {
       .catch(() => {
         setIsLoggedIn(false);
         setError(LOGIN_ERROR_MESSAGE);
-      });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   };
 
   const handleLogout = () => {
@@ -183,11 +191,11 @@ const App = () => {
             ></Route>
             <Route
               path="/signup"
-              element={<Register onRegister={handleRegister} error={error} />}
+              element={<Register onRegister={handleRegister} error={error} isLoading={isLoading} />}
             ></Route>
             <Route
               path="/signin"
-              element={<Login onLogin={handleLogin} error={error} />}
+              element={<Login onLogin={handleLogin} error={error} isLoading={isLoading}/>}
             ></Route>
             <Route path="*" element={<NotFound />}></Route>
           </Routes>

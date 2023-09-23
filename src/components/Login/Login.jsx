@@ -5,7 +5,7 @@ import Form from "../Form/Form";
 import FormInput from "../FormInput/FormInput";
 import { useFormWithValidation } from "../../hooks/useFormAndValidation";
 
-const Login = ({ onLogin, error }) => {
+const Login = ({ onLogin, error, isLoading }) => {
   const { isValid, handleChange, values, errors } = useFormWithValidation({});
 
   const handleSubmit = (evt) => {
@@ -29,6 +29,7 @@ const Login = ({ onLogin, error }) => {
         isValid={isValid}
         hasErrors={errors}
         errorMessage={error}
+        isLoading={isLoading}
       >
         <FormInput
           inputType={"email"}

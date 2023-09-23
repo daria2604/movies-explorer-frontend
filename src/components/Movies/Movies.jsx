@@ -117,7 +117,7 @@ const Movies = ({ isLoggedIn }) => {
 
   return (
     <Page isLoggedIn={isLoggedIn} pathName={"movies"} className={"movies"}>
-      <SearchForm handleSearch={handleSearch} handleSwitch={handleSwitch} />
+      <SearchForm handleSearch={handleSearch} handleSwitch={handleSwitch} isSubmitting={isLoading}/>
       {isLoading ? (
         <Preloader />
       ) : (

@@ -10,6 +10,7 @@ const Form = ({
   onSubmit,
   hasErrors,
   errorMessage,
+  isLoading,
 }) => {
   return (
     <>
@@ -28,9 +29,9 @@ const Form = ({
             className={`button form__submit-button ${
               !isValid ? "button_disabled form__submit-button_disabled" : ""
             }`}
-            disabled={!isValid}
+            disabled={!isValid || isLoading}
           >
-            {buttonText}
+            {isLoading ? "Загрузка..." : buttonText}
           </button>
         </div>
       </form>
