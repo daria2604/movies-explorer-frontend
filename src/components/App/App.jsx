@@ -114,6 +114,7 @@ const App = () => {
         setCurrentUser({});
         setIsLoggedIn(false);
         localStorage.clear();
+        navigate("/", { replace: true });
       })
       .catch(() => {
         setError(SERVER_ERROR_MESSAGE);
