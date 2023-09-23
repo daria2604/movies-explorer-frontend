@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 import caluculateMovieDuration from "../../utils/movieDuration";
+import { WIDTH_TABLET_768 } from "../../utils/constants";
 
 const MoviesCard = ({ movie, handleClick }) => {
   const [hover, setHover] = useState(false);
@@ -11,13 +12,13 @@ const MoviesCard = ({ movie, handleClick }) => {
 
   const imageClassName = `card__image ${!isSaved ? "" : "no-cursor"}`;
   const buttonSaveClassName =
-    width <= 768
+    width <= WIDTH_TABLET_768
       ? "card__save-button"
       : hover
       ? "card__save-button"
       : "card__button_hide";
   const buttonRemoveClassName =
-    width <= 768
+    width <= WIDTH_TABLET_768
       ? "card__remove-icon"
       : hover
       ? "card__remove-icon"

@@ -2,6 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./MoviesCardList.css";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import { useLocation } from "react-router-dom";
+import {
+  ADD_MOVIES,
+  ADD_MOVIES_DESKTOP,
+  MAX_MOVIES_DESKTOP,
+  MAX_MOVIES_MOBILE,
+  MAX_MOVIES_TABLET,
+  WIDTH_MOBILE,
+  WIDTH_TABLET_1024,
+} from "../../utils/constants";
 
 const MoviesCardList = ({ movies, error, handleClick }) => {
   const location = useLocation();
@@ -15,15 +24,15 @@ const MoviesCardList = ({ movies, error, handleClick }) => {
   const setCards = () => {
     const width = window.innerWidth;
 
-    if (width <= 650) {
-      setMaxMovies(5);
-      setAddCards(2);
-    } else if (width <= 1024) {
-      setMaxMovies(8);
-      setAddCards(2);
+    if (width <= WIDTH_MOBILE) {
+      setMaxMovies(MAX_MOVIES_MOBILE);
+      setAddCards(ADD_MOVIES);
+    } else if (width <= WIDTH_TABLET_1024) {
+      setMaxMovies(MAX_MOVIES_TABLET);
+      setAddCards(ADD_MOVIES);
     } else {
-      setMaxMovies(12);
-      setAddCards(3);
+      setMaxMovies(MAX_MOVIES_DESKTOP);
+      setAddCards(ADD_MOVIES_DESKTOP);
     }
   };
 
