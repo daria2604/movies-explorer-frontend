@@ -36,10 +36,11 @@ const SearchForm = ({ handleSearch, handleSwitch, isSubmitting }) => {
   }, []);
 
   const handleToggleSwitcher = () => {
-    if (searchQuery) {
+    if (searchQuery || location.pathname === "/saved-movies") {
       handleSearch(searchQuery, !toggle);
       localStorage.setItem(isShortMovieKey, !toggle);
     }
+
     handleSwitch();
     setToggle(!toggle);
   };
