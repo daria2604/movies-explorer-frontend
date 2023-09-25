@@ -87,34 +87,6 @@ const Movies = ({ isLoggedIn }) => {
     setIsShortMovieChecked(!isShortMovieChecked);
   };
 
-  const handleCardButtonClick = (movie) => {
-    const isSaved = savedMovies.some(
-      (savedMovie) => savedMovie.movieId === movie.id
-    );
-
-    if (!isSaved) {
-      mainApi
-        .saveMovie(movie)
-        .then((newMovie) => {
-          setSavedMovies([newMovie, ...savedMovies]);
-        })
-        .catch(() => console.error);
-    } else {
-      const movieId = savedMovies.find((card) => card._id);
-
-      mainApi
-        .deleteMovie(movieId._id)
-        .then(() => {
-          const filteredMovies = savedMovies.filter(
-            (card) => card.movieId !== movie.id
-          );
-          setSavedMovies(filteredMovies);
-          localStorage.setItem("saved-movies", JSON.stringify(filteredMovies));
-        })
-        .catch(() => console.error);
-    }
-  };
-
   return (
     <Page isLoggedIn={isLoggedIn} pathName={"movies"} className={"movies"}>
       <SearchForm handleSearch={handleSearch} handleSwitch={handleSwitch} isSubmitting={isLoading}/>
@@ -124,7 +96,6 @@ const Movies = ({ isLoggedIn }) => {
         <MoviesCardList
           movies={movies}
           error={error}
-          handleClick={handleCardButtonClick}
         />
       )}
     </Page>

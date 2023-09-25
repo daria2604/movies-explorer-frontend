@@ -3,6 +3,7 @@ import "./MoviesCard.css";
 import { useLocation } from "react-router-dom";
 import caluculateMovieDuration from "../../utils/movieDuration";
 import { WIDTH_TABLET_768 } from "../../utils/constants";
+import mainApi from "../../utils/MainApi";
 
 const MoviesCard = ({ movie, handleClick }) => {
   const [hover, setHover] = useState(false);
@@ -25,10 +26,10 @@ const MoviesCard = ({ movie, handleClick }) => {
       : "card__button_hide";
   const imageUrl = `https://api.nomoreparties.co${movie.image.url}`;
   const duration = caluculateMovieDuration(movie);
+  const savedMovies = JSON.parse(localStorage.getItem("saved-movies"));
 
   useEffect(() => {
-    const savedMovies = JSON.parse(localStorage.getItem("saved-movies"));
-    if (savedMovies.some((card) => card.movieId === movie.id)) {
+    if (savedMovies && savedMovies.some((card) => card.movieId === movie.id)) {
       setIsSaved(true);
     }
   }, [movie]);
@@ -39,11 +40,36 @@ const MoviesCard = ({ movie, handleClick }) => {
 
   const handleCardButtonClick = () => {
     if (!isSaved) {
-      handleClick(movie);
-      setIsSaved(true);
+      mainApi
+        .saveMovie(movie)
+        .then((newMovie) => {
+          setIsSaved(true);
+          localStorage.setItem(
+            "saved-movies",
+            JSON.stringify([newMovie, ...savedMovies])
+          );
+        })
+        .catch(() => console.error);
     } else {
-      handleClick(movie);
-      setIsSaved(false);
+      const savedMovie = savedMovies.find((card) => card.movieId === movie.id);
+      if (savedMovie) {
+        const movieId = savedMovie._id;
+
+        mainApi
+          .deleteMovie(movieId)
+          .then(() => {
+            setIsSaved(false);
+            const filteredMovies = savedMovies.filter(
+              (card) => card.movieId !== movie.id
+            );
+
+            localStorage.setItem(
+              "saved-movies",
+              JSON.stringify(filteredMovies)
+            );
+          })
+          .catch(() => console.error);
+      }
     }
   };
 
