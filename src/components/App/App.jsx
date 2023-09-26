@@ -22,6 +22,7 @@ import {
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState({});
+  const [savedMovies, setSavedMovies] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,6 +54,7 @@ const App = () => {
         }
         setIsLoggedIn(true);
         getUserInfo();
+        getUserMovies();
       })
       .catch(() => {
         setIsLoggedIn(false);
@@ -72,6 +74,17 @@ const App = () => {
         setError(INCORRECT_TOKEN_ERROR_MESSAGE);
       });
   };
+
+  const getUserMovies = () => {
+    mainApi
+      .getSavedMovies()
+      .then((data) => {
+        setSavedMovies(data.reverse());
+      })
+      .catch(() => {
+        setError(SERVER_ERROR_MESSAGE)
+      })
+  }
 
   const handleRegister = ({ name, email, password }) => {
     setIsLoading(true)
@@ -100,6 +113,7 @@ const App = () => {
           setIsLoggedIn(true);
           setCurrentUser(data);
           getUserInfo();
+          getUserMovies();
           navigate("/movies", { replace: true });
         } else {
           setIsLoggedIn(false);
@@ -163,6 +177,8 @@ const App = () => {
                   isLoggedIn={isLoggedIn}
                   element={Movies}
                   isLoading={isLoading}
+                  userMovies={savedMovies}
+                  setSavedMovies={setSavedMovies}
                 />
               }
             ></Route>
@@ -173,6 +189,8 @@ const App = () => {
                   isLoggedIn={isLoggedIn}
                   element={SavedMovies}
                   isLoading={isLoading}
+                  userMovies={savedMovies}
+                  setSavedMovies={setSavedMovies}
                 />
               }
             ></Route>

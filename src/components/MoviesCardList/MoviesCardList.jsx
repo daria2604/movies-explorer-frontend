@@ -12,7 +12,7 @@ import {
   WIDTH_TABLET_1024,
 } from "../../utils/constants";
 
-const MoviesCardList = ({ movies, error, handleClick }) => {
+const MoviesCardList = ({ movies, error, handleClick, savedMovies, setSavedMovies }) => {
   const location = useLocation();
   const [maxMovies, setMaxMovies] = useState(0);
   const [addCards, setAddCards] = useState(0);
@@ -61,6 +61,8 @@ const MoviesCardList = ({ movies, error, handleClick }) => {
                       key={movie.id}
                       movie={movie}
                       handleClick={handleClick}
+                      savedMovies={savedMovies}
+                      setSavedMovies={setSavedMovies}
                     />
                   );
                 } else {
@@ -72,6 +74,7 @@ const MoviesCardList = ({ movies, error, handleClick }) => {
                     key={movie._id}
                     movie={movie}
                     handleClick={handleClick}
+                    setSavedMovies={setSavedMovies}
                   />
                 );
               }

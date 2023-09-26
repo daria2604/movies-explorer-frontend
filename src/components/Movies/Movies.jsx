@@ -8,40 +8,20 @@ import moviesApi from "../../utils/MoviesApi";
 import {
   MOVIES_NOT_FOUND_ERROR_MESSAGE,
   REQUEST_ERROR_MESSAGE,
-  SERVER_ERROR_MESSAGE,
 } from "../../utils/errorMessages";
 import { filterMovies } from "../../utils/filter";
-import mainApi from "../../utils/MainApi";
 
-const Movies = ({ isLoggedIn }) => {
+const Movies = ({ isLoggedIn, userMovies, setSavedMovies }) => {
   const [movies, setMovies] = useState([]);
-  const [savedMovies, setSavedMovies] = useState([]);
-  const [isSavedMoviesLoaded, setIsSavedMoviesLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [isShortMovieChecked, setIsShortMovieChecked] = useState(false);
   const storedMovies = JSON.parse(localStorage.getItem("movies"));
 
   useEffect(() => {
-    mainApi
-      .getSavedMovies()
-      .then((data) => {
-        setSavedMovies(data);
-        setIsSavedMoviesLoaded(true);
-        localStorage.setItem("saved-movies", JSON.stringify(data));
-      })
-      .catch(() => {
-        setError(SERVER_ERROR_MESSAGE);
-      });
-  }, []);
-
-  // сохранить загруженные фильмы, чтобы не было бесконечного цикла запросов к серверу
-  useEffect(() => {
-    if (isSavedMoviesLoaded) {
-      setSavedMovies(savedMovies);
-      localStorage.setItem("saved-movies", JSON.stringify(savedMovies));
-    }
-  }, [isSavedMoviesLoaded, savedMovies]);
+    setSavedMovies(userMovies);
+    localStorage.setItem("saved-movies", JSON.stringify(userMovies));
+  }, [userMovies, setSavedMovies]);
 
   const handleSearch = (query, isShortMovieChecked) => {
     setIsLoading(true);
@@ -96,6 +76,8 @@ const Movies = ({ isLoggedIn }) => {
         <MoviesCardList
           movies={movies}
           error={error}
+          savedMovies={userMovies}
+          setSavedMovies={setSavedMovies}
         />
       )}
     </Page>

@@ -8,44 +8,23 @@ import Preloader from "../Preloader/Preloader";
 import {
   MOVIES_NOT_FOUND_ERROR_MESSAGE,
   NO_FAVS_ERROR_MESSAGE,
-  SERVER_ERROR_MESSAGE,
 } from "../../utils/errorMessages";
 import mainApi from "../../utils/MainApi";
 
-const SavedMovies = ({ isLoggedIn }) => {
-  const [movies, setMovies] = useState([]);
+const SavedMovies = ({ isLoggedIn, userMovies, setSavedMovies }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [isShortMovieChecked, setIsShortMovieChecked] = useState(false);
-  const [isSavedMoviesLoaded, setIsSavedMoviesLoaded] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
-    mainApi
-      .getSavedMovies()
-      .then((data) => {
-        if (data.length !== 0) {
-          setMovies(data);
-          localStorage.setItem("saved-movies", JSON.stringify(data));
-          setIsSavedMoviesLoaded(true);
-        } else {
-          setError(NO_FAVS_ERROR_MESSAGE);
-        }
-      })
-      .catch(() => {
-        setError(SERVER_ERROR_MESSAGE);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+    const storedMovies = JSON.parse(localStorage.getItem("saved-movies"));
 
-  useEffect(() => {
-    if (isSavedMoviesLoaded) {
-      setMovies(movies);
-      localStorage.setItem("saved-movies", JSON.stringify(movies));
+    if (storedMovies && storedMovies.length > 0) {
+      setSavedMovies(storedMovies);
+    } else {
+      setError(NO_FAVS_ERROR_MESSAGE);
     }
-  }, [isSavedMoviesLoaded, movies]);
+  }, [setSavedMovies]);
 
   const handleSearch = (query, isShortMovieChecked) => {
     setIsLoading(true);
@@ -54,15 +33,19 @@ const SavedMovies = ({ isLoggedIn }) => {
 
   const filterStoredMovies = (query, isShortMovieChecked) => {
     const storedMovies = JSON.parse(localStorage.getItem("saved-movies"));
-    const filteredMovies = filterMovies(storedMovies, query, isShortMovieChecked);
-  
+    const filteredMovies = filterMovies(
+      storedMovies,
+      query,
+      isShortMovieChecked
+    );
+
     if (filteredMovies.length > 0) {
-      setMovies(filteredMovies);
+      setSavedMovies(filteredMovies);
       setError(null);
     } else {
       setError(MOVIES_NOT_FOUND_ERROR_MESSAGE);
     }
-  
+
     setIsLoading(false);
   };
 
@@ -74,8 +57,8 @@ const SavedMovies = ({ isLoggedIn }) => {
     mainApi
       .deleteMovie(movie._id)
       .then(() => {
-        const filteredMovies = movies.filter((card) => card._id !== movie._id);
-        setMovies(filteredMovies);
+        const filteredMovies = userMovies.filter((card) => card._id !== movie._id);
+        setSavedMovies(filteredMovies);
         localStorage.setItem("saved-movies", JSON.stringify(filteredMovies));
       })
       .catch((err) => {
@@ -85,14 +68,19 @@ const SavedMovies = ({ isLoggedIn }) => {
 
   return (
     <Page isLoggedIn={isLoggedIn} pathName={"saved-movies"} className={"saved"}>
-      <SearchForm handleSearch={handleSearch} handleSwitch={handleSwitch} isSubmitting={isLoading}/>
+      <SearchForm
+        handleSearch={handleSearch}
+        handleSwitch={handleSwitch}
+        isSubmitting={isLoading}
+      />
       {isLoading ? (
         <Preloader />
       ) : (
         <MoviesCardList
-          movies={movies}
+          movies={userMovies}
           error={error}
           handleClick={handleDeleteMovie}
+          setSavedMovies={setSavedMovies}
         />
       )}
     </Page>

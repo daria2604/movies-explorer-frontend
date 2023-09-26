@@ -5,7 +5,7 @@ import caluculateMovieDuration from "../../utils/movieDuration";
 import { WIDTH_TABLET_768 } from "../../utils/constants";
 import mainApi from "../../utils/MainApi";
 
-const MoviesCard = ({ movie, handleClick }) => {
+const MoviesCard = ({ movie, handleClick, savedMovies, setSavedMovies }) => {
   const [hover, setHover] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const location = useLocation();
@@ -26,13 +26,13 @@ const MoviesCard = ({ movie, handleClick }) => {
       : "card__button_hide";
   const imageUrl = `https://api.nomoreparties.co${movie.image.url}`;
   const duration = caluculateMovieDuration(movie);
-  const savedMovies = JSON.parse(localStorage.getItem("saved-movies"));
 
   useEffect(() => {
     if (savedMovies && savedMovies.some((card) => card.movieId === movie.id)) {
       setIsSaved(true);
+      setSavedMovies(savedMovies)
     }
-  }, [movie]);
+  }, [movie.id, savedMovies, setSavedMovies]);
 
   const handleHover = () => {
     setHover(!hover);
@@ -48,6 +48,7 @@ const MoviesCard = ({ movie, handleClick }) => {
             "saved-movies",
             JSON.stringify([newMovie, ...savedMovies])
           );
+          setSavedMovies([newMovie, ...savedMovies])
         })
         .catch(() => console.error);
     } else {
@@ -62,7 +63,7 @@ const MoviesCard = ({ movie, handleClick }) => {
             const filteredMovies = savedMovies.filter(
               (card) => card.movieId !== movie.id
             );
-
+            setSavedMovies(filteredMovies)
             localStorage.setItem(
               "saved-movies",
               JSON.stringify(filteredMovies)
