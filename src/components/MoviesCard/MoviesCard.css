@@ -19,8 +19,15 @@
   cursor: pointer;
 }
 
+.card__image-link {
+  display: block;
+  width: inherit;
+  height: inherit;
+}
+
 .card__button {
   position: absolute;
+  border: none;
   top: 14px;
   right: 14px;
   z-index: 1;
@@ -82,6 +89,10 @@
   border-radius: 3px;
   background-color: #F9F9F9;
   width: 44px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -107,6 +118,8 @@
     width: 300px;
     height: 168px;
   }
+
+  
 }
 
 @media (max-width: 650px) {

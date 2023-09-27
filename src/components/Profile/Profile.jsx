@@ -1,75 +1,153 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Profile.css";
 import Page from "../Page/Page";
 import { Link } from "react-router-dom";
-import Error from "../Error/Error";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import { useFormWithValidation } from "../../hooks/useFormAndValidation";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-const Profile = ({ isLoggedIn }) => {
+const Profile = ({ isLoggedIn, onLogout, onUpdateUserInfo, errorMessage }) => {
+  const currentUser = useContext(CurrentUserContext);
   const [isClicked, setIsClicked] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const { values, setValues, handleChange, isValid, setIsValid, errors } = useFormWithValidation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  useEffect(() => {
+    setIsValid(false);
+  }, [isSuccess, setIsValid]);
 
   const handleClick = () => {
-    setIsClicked(!isClicked);
+    setIsClicked(true);
+    setIsDisabled(false);
+    setIsSuccess(false);
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    const { name, email } = values;
+
+    setIsSubmitting(true);
+
+    onUpdateUserInfo({ name, email })
+      .then(() => {
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        setIsDisabled(true);
+      })
+      .catch(() => {
+        setIsSubmitting(false);
+        setIsSuccess(false);
+      });
+  };
+
+  const checkInputValue = (evt) => {
+    const { name, value } = evt.target;
+    handleChange(evt);
+
+    if (name === "name") {
+      setIsButtonDisabled(value === currentUser.name);
+    } else if (name === "email") {
+      setIsButtonDisabled(value === currentUser.email);
+    }
+  };
+
+  const handleLogout = () => {
+    onLogout();
   };
 
   return (
     <Page isLoggedIn={isLoggedIn} pathName={"profile"} className={"profile"}>
-      <h1 className="profile__heading">Привет, Дарья!</h1>
-      <form className="profile__form">
+      <h1 className="profile__heading">{`Привет ${currentUser.name}!`}</h1>
+      <form className="profile__form" onSubmit={handleSubmit}>
         <fieldset className="profile__fieldset">
           <label htmlFor="profileName" className="profile__label">
             Имя
             <input
               type="text"
               className="profile__input profile__input_type_name"
-              name="profileName"
+              name="name"
               id="profileName"
-              value="Дарья"
-              disabled
+              defaultValue={currentUser.name}
+              disabled={isDisabled}
+              minLength={2}
+              maxLength={30}
+              onChange={(evt) => {
+                handleChange(evt);
+                checkInputValue(evt);
+                setValues({ ...values, name: evt.target.value });
+              }}
+              required
             />
           </label>
-
+          {!isValid && (
+            <ErrorMessage type={"profile-input"} isActive={true}>
+              {errors?.name}
+            </ErrorMessage>
+          )}
           <label htmlFor="profileEmail" className="profile__label">
             E-mail
             <input
               type="email"
               className="profile__input profile__input_type_email"
-              name="profileEmail"
+              name="email"
               id="profileEmail"
-              value="pochta@yandex.ru"
-              disabled
+              defaultValue={currentUser.email}
+              disabled={isDisabled}
+              onChange={(evt) => {
+                handleChange(evt);
+                checkInputValue(evt);
+                setValues({ ...values, email: evt.target.value });
+              }}
+              required
             />
           </label>
+          {!isValid && (
+            <ErrorMessage type={"profile-input"} isActive={true}>
+              {errors?.email}
+            </ErrorMessage>
+          )}
         </fieldset>
         <div className="profile__button-container">
-          {!isClicked ? (
+          {isSuccess && (
+            <p className="profile__success">Профиль успешно обновлен</p>
+          )}
+          {!isClicked || isSuccess ? (
             <>
               <button
                 type="button"
-                className="profile__button profile__edit-button"
+                className="button profile__button profile__edit-button"
                 onClick={handleClick}
               >
                 Редактировать
               </button>
               <Link
+                onClick={handleLogout}
                 to="/signin"
-                className="profile__button profile__signout-button"
+                className="button profile__button profile__signout-button"
               >
                 Выйти из аккаунта
               </Link>
             </>
           ) : (
             <>
-              <Error type={"profile__error"}></Error>
+              {(!isValid || !isSuccess) && (
+                <ErrorMessage type={"profile"} isActive={true}>
+                  {errorMessage}
+                </ErrorMessage>
+              )}
               <button
                 type="submit"
-                className="button profile__button profile__submit-button"
-                onSubmit={handleSubmit}
+                className={`button profile__button profile__submit-button ${
+                  !isValid || isButtonDisabled
+                    ? "button_disabled profile__submit-button_disabled"
+                    : ""
+                }`}
+                disabled={!isValid || isSubmitting || isButtonDisabled}
               >
-                Сохранить
+                {isSubmitting ? "Сохранение..." : "Сохранить"}
               </button>
             </>
           )}

@@ -5,9 +5,15 @@
   align-items: center;
 }
 
+.cards__error {
+  margin: 40px;
+  font-size: 22px;
+  text-align: center;
+}
+
 .cards__container {
-  display: grid;
-  grid-template-columns: repeat(3, max-content);
+  display: flex;
+  flex-wrap: wrap;
   gap: 60px 30px;
   justify-content: center;
   padding: 70px 0 26px 0;
@@ -43,11 +49,11 @@
   visibility: hidden;
 }
 
-@media (max-width: 1150px) {
+/* @media (max-width: 1150px) {
   .cards__container {
     grid-template-columns: repeat(2, max-content);
   }
-}
+} */
 
 @media (max-width: 1024px) {
   .cards__container {
@@ -69,7 +75,7 @@
 
 @media (max-width: 650px) {
   .cards__container {
-    grid-template-columns: max-content;
+    /* grid-template-columns: max-content; */
     padding-top: 40px;
     row-gap: 36px;
   }

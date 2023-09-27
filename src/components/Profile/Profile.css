@@ -76,16 +76,10 @@
   background-color: unset;
   font-size: 13px;
   font-weight: 400;
-  
-  &:hover {
-    opacity: .7;
-    transition: all .2s linear;
-  }
 }
 
 .profile__button  {
   display: block;
-  cursor: pointer;
   padding: 0;
 }
 
@@ -112,13 +106,17 @@
 
 .profile__submit-button_disabled {
   color: #C2C2C2;
-  border-radius: 3px;
   background-color: #F8F8F8;
-  cursor: unset;
 }
 
 .profile__error{
   margin-bottom: 4px;
+}
+
+.profile__success {
+  margin: 0;
+  font-size: 11px;
+  color: #14d266;
 }
 
 @media (max-width: 820px) {
