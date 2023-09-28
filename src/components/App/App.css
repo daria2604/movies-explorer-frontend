@@ -21,6 +21,7 @@
 .container {
   max-width: 1280px;
   margin: 0 auto;
+  padding: 0 70px;
 }
 
 .button {
@@ -54,5 +55,17 @@
   &:link,
   &:visited {
     color: inherit;
+  }
+}
+
+@media (max-width: 820px) {
+  .container {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 540px) {
+  .container {
+    padding: 0 10px;
   }
 }

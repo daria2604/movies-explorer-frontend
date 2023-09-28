@@ -1,7 +1,7 @@
 .header {
   background-color: #fff;
   color: #000;
-  padding: 18px 70px;
+  padding: 18px 0;
 }
 
 .header__container {
@@ -43,13 +43,6 @@
   display: none;
 }
 
-@media (max-width: 820px) {
-  .header {
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-}
-
 @media (max-width: 768px) {
   .header__menu-button {
     display: block;
@@ -84,7 +77,7 @@
 }
 
 @media (max-width: 540px) {
-  .header {
+  .header > .container {
     padding-left: 14px;
     padding-right: 14px;
   }
