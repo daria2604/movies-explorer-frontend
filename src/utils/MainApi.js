@@ -113,7 +113,7 @@ class MainApi {
 
 const mainApi = new MainApi({
   // baseUrl: "http://localhost:4000",
-  baseUrl: "https://helmet-tadpole.cyclic.app/",
+  baseUrl: "https://helmet-tadpole.cyclic.app",
   headers: {
     "Content-Type": "application/json",
   },
